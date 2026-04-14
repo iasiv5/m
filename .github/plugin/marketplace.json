@@ -1,0 +1,19 @@
+{
+  "name": "iasiv5-marketplace",
+  "metadata": {
+    "description": "Marketplace for iasiv5 GitHub Copilot plugins",
+    "version": "1.0.0",
+    "pluginRoot": "."
+  },
+  "owner": {
+    "name": "iasiv5"
+  },
+  "plugins": [
+    {
+      "name": "iasi-plugin",
+      "source": ".",
+      "description": "GitHub Copilot plugin with code-review skill and session-logger hooks",
+      "version": "1.0.1"
+    }
+  ]
+}

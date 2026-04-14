@@ -1,4 +1,4 @@
-# ai-workspace-assets-plugin
+# iasi plugin
 
 这是一个最小可用的 GitHub Copilot plugin 仓库。
 
@@ -14,9 +14,12 @@
 
 ```text
 .
+├── plugin.json
 ├── hooks.json
 ├── .github/
 │   ├── copilot-instructions.md
+│   ├── plugin/
+│   │   └── marketplace.json
 │   └── hooks/
 │       └── session-logger/
 └── skills/
@@ -27,8 +30,10 @@
 
 ## 为什么先做成这个形态
 
+- 根目录 `plugin.json` 是单插件仓库安装的必需清单。
 - VS Code 的 GitHub Copilot agent plugin 可以直接从插件根目录读取 `skills/`。
 - `hooks.json + .github/hooks/` 的目录布局与官方常见 plugin/hook 组织方式保持一致。
+- `.github/plugin/marketplace.json` 用于作为插件市场源时的索引信息。
 - 这样可以保证 `plugin/` 作为独立仓库上传后，以较小配置成本启用 skill 与 hook。
 
 ## 安装方式
