@@ -1,10 +1,10 @@
 {
   "version": 1,
   "hooks": {
-    "SessionStart": [
+    "sessionStart": [
       {
         "type": "command",
-        "command": "bash -lc 'set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"'",
+        "bash": "set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"",
         "windows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { $pluginRoot = $env:COPILOT_PLUGIN_ROOT; if ([string]::IsNullOrWhiteSpace($pluginRoot)) { Write-Output '[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.'; exit 0 }; $runner = Join-Path $pluginRoot 'hooks\\session-logger\\run-hook.ps1'; if (-not (Test-Path $runner)) { Write-Output ('[session-logger] hook runner not found: ' + $runner); exit 0 }; & $runner -HookScript $env:HOOK_SCRIPT }\"",
         "cwd": ".",
         "env": {
@@ -12,13 +12,13 @@
           "LANG": "C.UTF-8",
           "LC_CTYPE": "C.UTF-8"
         },
-        "timeout": 15
+        "timeoutSec": 15
       }
     ],
-    "Stop": [
+    "sessionEnd": [
       {
         "type": "command",
-        "command": "bash -lc 'set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"'",
+        "bash": "set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"",
         "windows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { $pluginRoot = $env:COPILOT_PLUGIN_ROOT; if ([string]::IsNullOrWhiteSpace($pluginRoot)) { Write-Output '[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.'; exit 0 }; $runner = Join-Path $pluginRoot 'hooks\\session-logger\\run-hook.ps1'; if (-not (Test-Path $runner)) { Write-Output ('[session-logger] hook runner not found: ' + $runner); exit 0 }; & $runner -HookScript $env:HOOK_SCRIPT }\"",
         "cwd": ".",
         "env": {
@@ -26,11 +26,11 @@
           "LANG": "C.UTF-8",
           "LC_CTYPE": "C.UTF-8"
         },
-        "timeout": 15
+        "timeoutSec": 15
       },
       {
         "type": "command",
-        "command": "bash -lc 'set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"'",
+        "bash": "set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"",
         "windows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { $pluginRoot = $env:COPILOT_PLUGIN_ROOT; if ([string]::IsNullOrWhiteSpace($pluginRoot)) { Write-Output '[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.'; exit 0 }; $runner = Join-Path $pluginRoot 'hooks\\session-logger\\run-hook.ps1'; if (-not (Test-Path $runner)) { Write-Output ('[session-logger] hook runner not found: ' + $runner); exit 0 }; & $runner -HookScript $env:HOOK_SCRIPT }\"",
         "cwd": ".",
         "env": {
@@ -39,11 +39,11 @@
           "LANG": "C.UTF-8",
           "LC_CTYPE": "C.UTF-8"
         },
-        "timeout": 15
+        "timeoutSec": 15
       },
       {
         "type": "command",
-        "command": "bash -lc 'set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"'",
+        "bash": "set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"",
         "windows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { $pluginRoot = $env:COPILOT_PLUGIN_ROOT; if ([string]::IsNullOrWhiteSpace($pluginRoot)) { Write-Output '[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.'; exit 0 }; $runner = Join-Path $pluginRoot 'hooks\\session-logger\\run-hook.ps1'; if (-not (Test-Path $runner)) { Write-Output ('[session-logger] hook runner not found: ' + $runner); exit 0 }; & $runner -HookScript $env:HOOK_SCRIPT }\"",
         "cwd": ".",
         "env": {
@@ -52,13 +52,13 @@
           "LANG": "C.UTF-8",
           "LC_CTYPE": "C.UTF-8"
         },
-        "timeout": 15
+        "timeoutSec": 15
       }
     ],
-    "UserPromptSubmit": [
+    "userPromptSubmitted": [
       {
         "type": "command",
-        "command": "bash -lc 'set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"'",
+        "bash": "set -eo pipefail; ROOT=\"${COPILOT_PLUGIN_ROOT:-}\"; [ -n \"$ROOT\" ] || { echo \"[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.\"; exit 0; }; SCRIPT=\"${HOOK_SCRIPT:-}\"; [ -n \"$SCRIPT\" ] || { echo \"[session-logger] HOOK_SCRIPT is empty, skip.\"; exit 0; }; TARGET=\"$ROOT/$SCRIPT\"; [ -f \"$TARGET\" ] || { echo \"[session-logger] target script not found: $TARGET\"; exit 0; }; exec bash \"$TARGET\"",
         "windows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { $pluginRoot = $env:COPILOT_PLUGIN_ROOT; if ([string]::IsNullOrWhiteSpace($pluginRoot)) { Write-Output '[session-logger] COPILOT_PLUGIN_ROOT is empty, skip.'; exit 0 }; $runner = Join-Path $pluginRoot 'hooks\\session-logger\\run-hook.ps1'; if (-not (Test-Path $runner)) { Write-Output ('[session-logger] hook runner not found: ' + $runner); exit 0 }; & $runner -HookScript $env:HOOK_SCRIPT }\"",
         "cwd": ".",
         "env": {
@@ -67,7 +67,7 @@
           "LANG": "C.UTF-8",
           "LC_CTYPE": "C.UTF-8"
         },
-        "timeout": 15
+        "timeoutSec": 15
       }
     ]
   }
