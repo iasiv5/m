@@ -3,7 +3,7 @@
   "metadata": {
     "description": "Marketplace for iasiv5 GitHub Copilot plugins",
     "version": "1.0.0",
-    "pluginRoot": "."
+    "pluginRoot": "./plugins"
   },
   "owner": {
     "name": "iasiv5"
@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "iasi-plugin",
-      "source": ".",
+      "source": "iasi-plugin",
       "description": "GitHub Copilot plugin with story-generator agent, code-review skill, hooks, and reusable prompts",
       "version": "1.0.5"
     }

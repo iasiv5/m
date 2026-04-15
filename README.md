@@ -1,82 +1,59 @@
-# iasi plugin
+# iasiv5 Copilot Marketplace
 
-这是一个最小可用的 GitHub Copilot plugin 仓库。
+这是一个 GitHub Copilot marketplace 风格仓库：根目录负责暴露 marketplace 元数据，实际可安装插件放在 `plugins/` 下。
 
-当前版本包含以下可复用资产：
+当前已提供 1 个插件：
 
-- `story-generator` custom agent
-- `code-review` skill
-- `session-logger` hook
-- `create-git-commit-message-IEC` command prompt
-- `python-cli-scripts` path-specific instruction
+| Plugin | Included assets |
+| --- | --- |
+| `iasi-plugin` | `story-generator` agent、`code-review` skill、`session-logger` hook、`create-git-commit-message-IEC` command prompt、`python-cli-scripts` instruction |
 
-`code-review` 提供结构化代码审查流程。
-`session-logger` 负责记录会话与提示词事件，便于审计和分析。
-
-## 当前结构
+## 仓库结构
 
 ```text
 .
-├── plugin.json
-├── agents/
-│   └── story-generator.agent.md
-├── commands/
-│   └── create-git-commit-message-IEC.prompt.md
-├── hooks/
-│   ├── hooks.json
-│   └── session-logger/
-├── instructions/
-│   └── python-cli-scripts.instructions.md
 ├── .github/
 │   ├── copilot-instructions.md
 │   └── plugin/
 │       └── marketplace.json
-└── skills/
-    └── code-review/
-        ├── SKILL.md
-        └── resources/
+├── plugins/
+│   └── iasi-plugin/
+│       ├── .github/plugin/plugin.json
+│       ├── agents/
+│       ├── commands/
+│       ├── hooks/
+│       ├── instructions/
+│       ├── skills/
+│       └── README.md
+├── INSTALL.md
+└── README.md
 ```
 
-## 为什么先做成这个形态
+## 架构说明
 
-- 目录采用插件常见分层：`agents/`、`commands/`、`hooks/`、`skills/`。
-- 根目录 `plugin.json` 用于“从源安装”场景。
-- `.github/plugin/marketplace.json` 用于“按 marketplace 仓库安装”场景。
-- 两种方式并存，可以减少不同安装入口下的兼容性问题。
+- 根目录 `.github/plugin/marketplace.json` 声明 marketplace，并通过 `pluginRoot: "./plugins"` 暴露子插件。
+- 每个插件在 `plugins/<name>/` 下自包含自己的 runtime 资产和 `.github/plugin/plugin.json`。
+- 这种结构与 `awesome-copilot` 的多插件分发方式一致，后续新增第二个、第三个插件时不需要再重构根目录。
 
 ## 安装方式
 
-### 从 Git 仓库安装
+请把仓库 `iasiv5/plugin` 当作 marketplace 源添加，然后选择安装其中的 `iasi-plugin`。
 
-1. 在 VS Code 中启用 `chat.plugins.enabled`。
-2. 执行命令 `Chat: Install Plugin From Source`。
-3. 输入仓库地址：`https://github.com/iasiv5/plugin`。
-
-### 作为 Marketplace 仓库使用
-
-如果你在其他仓库里通过 marketplace 方式添加 `iasiv5/plugin`，会读取 `.github/plugin/marketplace.json`。
-
-如果出现“在 iasiv5/plugin 中找不到插件，这似乎不是有效的插件市场”，通常是以下原因之一：
-
-1. 本地缓存仍是旧版本，尚未拉到最新提交。
-2. 输入了 marketplace 名称但没有继续选择/安装其中的 `iasi-plugin`。
-
-## 使用方式
-
-- 在聊天中直接输入 `/code-review` 手动调用。
-- 或在你发起代码审查请求时，让 Copilot 根据 skill 描述自动加载。
-- 会话期间，hook 会按 `hooks/hooks.json` 配置自动记录日志事件。
+详细安装步骤见 [`INSTALL.md`](INSTALL.md)。
 
 ## 当前边界
 
-- 已包含：1 个 custom agent、1 个 skill、1 组 hook（session-logger）、1 个 command prompt、1 条 path-specific instruction。
-- 未包含：MCP server。
-- 未包含：任何依赖本地绝对路径的安装逻辑。
+- 已包含：1 个 custom agent、1 个 skill、1 组 hook（session-logger）、1 个 command prompt、1 条 path-specific instruction
+- 未包含：MCP server
+- 未包含：依赖用户本地绝对安装路径的分发结构
 
-## 后续建议
+## 后续新增插件
 
-如果你后续想把现有 `prompts/` 里的工作流继续迁入 plugin，建议优先按以下顺序演进：
+后续新增插件时，只需要：
 
-1. 把路由型 prompt 继续沉淀到 `commands/` 或改造成 `agents/` 下的自定义 agent。
-2. 把与环境初始化强绑定的 prompt 拆成更通用的 skill 或 agent。
-3. 只有在确实需要外部命令或系统集成时，再增加新的 hooks 或 MCP。
+1. 创建 `plugins/<new-plugin>/`
+2. 添加 `plugins/<new-plugin>/.github/plugin/plugin.json`
+3. 把该插件资产放到自己的目录里
+4. 在根 `.github/plugin/marketplace.json` 追加一条插件记录
+
+`iasi-plugin` 的插件级说明见 [`plugins/iasi-plugin/README.md`](plugins/iasi-plugin/README.md)。

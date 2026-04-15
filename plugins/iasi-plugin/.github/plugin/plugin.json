@@ -13,8 +13,8 @@
     "hooks",
     "prompt"
   ],
-  "agents": "agents/",
-  "commands": "commands/",
-  "skills": "skills/",
-  "hooks": "hooks/hooks.json"
+  "agents": "./agents/",
+  "commands": "./commands/",
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json"
 }
