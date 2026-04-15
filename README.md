@@ -6,7 +6,7 @@
 
 | Plugin | Included assets |
 | --- | --- |
-| `iasi-plugin` | `story-generator` agent、`code-review` skill、`session-logger` hook、`create-git-commit-message-IEC` command prompt、`python-cli-scripts` instruction |
+| `iec-plugin-demo` | `story-generator` agent、`code-review` skill、`session-logger` hook、`create-git-commit-message-IEC` command prompt、`python-cli-scripts` instruction |
 
 ## 仓库结构
 
@@ -17,7 +17,7 @@
 │   └── plugin/
 │       └── marketplace.json
 ├── plugins/
-│   └── iasi-plugin/
+│   └── iec-plugin-demo/
 │       ├── .github/plugin/plugin.json
 │       ├── agents/
 │       ├── commands/
@@ -37,7 +37,7 @@
 
 ## 安装方式
 
-请把仓库 `iasiv5/plugin` 当作 marketplace 源添加，然后选择安装其中的 `iasi-plugin`。
+请把仓库 `iasiv5/m` 当作 marketplace 源添加，然后选择安装其中的 `iec-plugin-demo`。
 
 详细安装步骤见 [`INSTALL.md`](INSTALL.md)。
 
@@ -56,4 +56,4 @@
 3. 把该插件资产放到自己的目录里
 4. 在根 `.github/plugin/marketplace.json` 追加一条插件记录
 
-`iasi-plugin` 的插件级说明见 [`plugins/iasi-plugin/README.md`](plugins/iasi-plugin/README.md)。
+`iec-plugin-demo` 的插件级说明见 [`plugins/iec-plugin-demo/README.md`](plugins/iec-plugin-demo/README.md)。

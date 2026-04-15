@@ -10,8 +10,8 @@
   },
   "plugins": [
     {
-      "name": "iasi-plugin",
-      "source": "iasi-plugin",
+      "name": "iec-plugin-demo",
+      "source": "iec-plugin-demo",
       "description": "GitHub Copilot plugin with story-generator agent, code-review skill, hooks, and reusable prompts",
       "version": "1.0.5"
     }
