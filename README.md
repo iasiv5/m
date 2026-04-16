@@ -6,7 +6,7 @@
 
 | Plugin | Included assets |
 | --- | --- |
-| `iec-plugin-demo` | `story-generator` agent、`code-review` skill、`session-logger` hook、`create-git-commit-message-IEC` command prompt、`python-cli-scripts` instruction |
+| `iec-plugin-demo` | `story-generator` agent、`code-review` skill、`create-git-commit-message-IEC` command prompt、`python-cli-scripts` instruction |
 
 ## 仓库结构
 
@@ -43,7 +43,8 @@
 
 ## 当前边界
 
-- 已包含：1 个 custom agent、1 个 skill、1 组 hook（session-logger）、1 个 command prompt、1 条 path-specific instruction
+- 已包含：1 个 custom agent、1 个 skill、1 个 command prompt、1 条 path-specific instruction
+- 未包含：hooks 实现
 - 未包含：MCP server
 - 未包含：依赖用户本地绝对安装路径的分发结构
 

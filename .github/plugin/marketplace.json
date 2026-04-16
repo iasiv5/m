@@ -12,8 +12,8 @@
     {
       "name": "iec-plugin-demo",
       "source": "iec-plugin-demo",
-      "description": "GitHub Copilot plugin with story-generator agent, code-review skill, hooks, and reusable prompts",
-      "version": "1.0.5"
+      "description": "GitHub Copilot plugin with story-generator agent, code-review skill, and reusable prompts",
+      "version": "2.0.0"
     }
   ]
 }
