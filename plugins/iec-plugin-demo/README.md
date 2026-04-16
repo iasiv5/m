@@ -6,11 +6,10 @@
 
 - `story-generator` custom agent
 - `code-review` skill
-- `session-logger` hook
 - `create-git-commit-message-IEC` command prompt
 - `python-cli-scripts` path-specific instruction
 
-`code-review` 提供结构化代码审查流程，`session-logger` 负责记录会话与提示词事件，便于审计和分析。
+`code-review` 提供结构化代码审查流程，用于规范化和系统化的代码质量评估。
 
 ## 插件结构
 
@@ -22,8 +21,7 @@
 ├── commands/
 │   └── create-git-commit-message-IEC.prompt.md
 ├── hooks/
-│   ├── hooks.json
-│   └── session-logger/
+│   └── hooks.json
 ├── instructions/
 │   └── python-cli-scripts.instructions.md
 └── skills/
@@ -42,10 +40,10 @@
 
 - 在聊天中直接输入 `/code-review` 手动调用
 - 或在你发起代码审查请求时，让 Copilot 根据 skill 描述自动加载
-- 会话期间，hook 会按 `hooks/hooks.json` 配置自动记录日志事件
 
 ## 当前边界
 
-- 已包含：1 个 custom agent、1 个 skill、1 组 hook（session-logger）、1 个 command prompt、1 条 path-specific instruction
+- 已包含：1 个 custom agent、1 个 skill、1 个 command prompt、1 条 path-specific instruction
+- 未包含：hooks 实现
 - 未包含：MCP server
 - 未包含：依赖本地绝对安装路径的分发逻辑

@@ -18,7 +18,6 @@
 - 打开 Chat 的插件列表，确认 `iec-plugin-demo` 已启用
 - 输入 `/`，确认能看到 `code-review`
 - 发送一条代码审查请求，检查 skill 是否被调用
-- 执行一次会话后，确认 hook 已在工作区 `logs/copilot/` 下写入日志（如启用了日志）
 
 ## 常见问题
 
