@@ -25,6 +25,12 @@ Comprehensive logging for GitHub Copilot coding agent sessions, tracking session
 - **结构化日志**：使用 JSON 格式，便于解析
 - **隐私可控**：支持通过配置完全关闭日志
 
+## Plugin 分发说明
+
+- 在当前 Copilot CLI 版本中，hooks 命令字符串里的变量与模板在不同运行时存在兼容差异。
+- 为保证稳定执行，`bash` 命令使用“无变量链式回退”方式定位脚本：优先使用工作区下 `plugins/iec-plugin-demo/`，再回退到用户目录 `.copilot/installed-plugins/`。
+- Windows 侧保留 `run-hook.ps1` 作为启动入口，以减少内联命令转义问题并保留 UTF-8 stdin/stdout 编码链路。
+
 ## Installation
 
 1. 进入当前项目的 `.github` 目录：
