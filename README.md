@@ -6,7 +6,7 @@
 
 | Plugin | Included assets |
 | --- | --- |
-| `iec-plugin-demo` | `ask-pro-max` agent、`code-review` skill、`ask-pro-max` / `create-git-commit-message-IEC` command prompts、`python-cli-scripts` instruction、空 hooks 占位 |
+| `iec-plugin-demo` | `ask-pro-max` agent、`code-review` skill、`ask-pro-max` command prompt、`python-cli-scripts` instruction、空 hooks 占位 |
 
 ## 仓库结构
 
@@ -44,7 +44,7 @@
 
 ## 当前边界
 
-- 已包含：1 个 custom agent、1 个 skill、2 个 command prompts、1 条 path-specific instruction、1 个空 hooks 占位文件
+- 已包含：1 个 custom agent、1 个 skill、1 个 command prompt、1 条 path-specific instruction、1 个空 hooks 占位文件
 - 未包含：非空 hooks 实现
 - 未包含：MCP server
 - 未包含：依赖用户本地绝对安装路径的分发结构

@@ -7,7 +7,6 @@
 - `ask-pro-max` custom agent
 - `code-review` skill
 - `ask-pro-max` command prompt
-- `create-git-commit-message-IEC` command prompt
 - `python-cli-scripts` path-specific instruction
 - `hooks/hooks.json` 空 hooks 占位文件
 
@@ -21,8 +20,7 @@
 ├── agents/
 │   └── ask-pro-max.agent.md
 ├── commands/
-│   ├── ask-pro-max.prompt.md
-│   └── create-git-commit-message-IEC.prompt.md
+│   └── ask-pro-max.prompt.md
 ├── hooks/
 │   └── hooks.json
 ├── instructions/
@@ -43,12 +41,12 @@
 ## 使用方式
 
 - 在聊天中直接输入 `/code-review` 手动调用
-- 在聊天中输入 `/` 后选择 `Ask Pro Max` 或 `create-git-commit-message-IEC` command prompt
+- 在聊天中输入 `/` 后选择 `Ask Pro Max` command prompt
 - 或在你发起代码审查请求时，让 Copilot 根据 skill 描述自动加载
 
 ## 当前边界
 
-- 已包含：1 个 custom agent、1 个 skill、2 个 command prompts、1 条 path-specific instruction、1 个空 hooks 占位文件
+- 已包含：1 个 custom agent、1 个 skill、1 个 command prompt、1 条 path-specific instruction、1 个空 hooks 占位文件
 - 未包含：非空 hooks 实现
 - 未包含：MCP server
 - 未包含：依赖本地绝对安装路径的分发逻辑

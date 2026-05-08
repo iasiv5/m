@@ -2,6 +2,16 @@
 
 All notable changes to `iec-plugin-demo` will be documented in this file.
 
+## [4.0.0] - 2026-05-08
+
+### Removed
+
+- Removed the published `create-git-commit-message-IEC` command prompt.
+
+### Changed
+
+- Updated marketplace metadata, plugin metadata, installation checks, and README inventories to reflect that `ask-pro-max` is now the only published command prompt.
+
 ## [3.0.0] - 2026-05-08
 
 ### Removed
