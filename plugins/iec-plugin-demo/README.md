@@ -1,17 +1,17 @@
 # iec-plugin-demo
 
-`iec-plugin-demo` 是当前 marketplace 里的第一个 GitHub Copilot 插件。
+`iec-plugin-demo` 是当前 marketplace 里的示例 GitHub Copilot 插件，聚焦高标准只读分析与结构化代码审查。
 
 它包含以下可复用资产：
 
-- `story-generator` custom agent
 - `ask-pro-max` custom agent
 - `code-review` skill
-- `create-git-commit-message-IEC` command prompt
 - `ask-pro-max` command prompt
+- `create-git-commit-message-IEC` command prompt
 - `python-cli-scripts` path-specific instruction
+- `hooks/hooks.json` 空 hooks 占位文件
 
-`code-review` 提供结构化代码审查流程，用于规范化和系统化的代码质量评估。
+`ask-pro-max` 用于高标准、只读的问题分析；`code-review` 提供结构化代码审查流程，用于规范化和系统化的代码质量评估。
 
 ## 插件结构
 
@@ -19,8 +19,7 @@
 .
 ├── .github/plugin/plugin.json
 ├── agents/
-│   ├── ask-pro-max.agent.md
-│   └── story-generator.agent.md
+│   └── ask-pro-max.agent.md
 ├── commands/
 │   ├── ask-pro-max.prompt.md
 │   └── create-git-commit-message-IEC.prompt.md
@@ -28,6 +27,7 @@
 │   └── hooks.json
 ├── instructions/
 │   └── python-cli-scripts.instructions.md
+├── CHANGELOG.md
 └── skills/
     └── code-review/
         ├── SKILL.md
@@ -48,7 +48,7 @@
 
 ## 当前边界
 
-- 已包含：2 个 custom agent、1 个 skill、2 个 command prompt、1 条 path-specific instruction
-- 未包含：hooks 实现
+- 已包含：1 个 custom agent、1 个 skill、2 个 command prompts、1 条 path-specific instruction、1 个空 hooks 占位文件
+- 未包含：非空 hooks 实现
 - 未包含：MCP server
 - 未包含：依赖本地绝对安装路径的分发逻辑

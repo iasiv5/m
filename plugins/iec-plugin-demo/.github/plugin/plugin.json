@@ -1,14 +1,13 @@
 {
   "name": "iec-plugin-demo",
-  "description": "GitHub Copilot plugin with story-generator and ask-pro-max agents, code-review skill, and reusable command prompts",
-  "version": "2.1.0",
+  "description": "GitHub Copilot plugin with ask-pro-max, code-review, and reusable command prompts",
+  "version": "3.0.0",
   "author": {
     "name": "iasiv5"
   },
   "license": "MIT",
   "keywords": [
     "copilot-plugin",
-    "story-generator",
     "ask-pro-max",
     "code-review",
     "prompt"

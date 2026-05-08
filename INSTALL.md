@@ -16,8 +16,8 @@
 ## 验证
 
 - 打开 Chat 的插件列表，确认 `iec-plugin-demo` 已启用
-- 输入 `/`，确认能看到 `code-review`
-- 发送一条代码审查请求，检查 skill 是否被调用
+- 输入 `/`，确认能看到 `code-review`、`Ask Pro Max` 和 `create-git-commit-message-IEC`
+- 发送一条代码审查请求，或手动触发 `Ask Pro Max`，检查插件资产是否可被调用
 
 ## 常见问题
 
