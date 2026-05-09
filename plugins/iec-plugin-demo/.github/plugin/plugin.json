@@ -1,7 +1,7 @@
 {
   "name": "iec-plugin-demo",
   "description": "GitHub Copilot plugin with ask-pro-max, code-review, and one reusable command prompt",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "author": {
     "name": "iasiv5"
   },

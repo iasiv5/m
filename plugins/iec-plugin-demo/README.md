@@ -7,7 +7,7 @@
 - `ask-pro-max` custom agent
 - `code-review` skill
 - `ask-pro-max` command prompt
-- `python-cli-scripts` path-specific instruction
+- `copilot-thought-logging` workspace-wide instruction
 - `hooks/hooks.json` 空 hooks 占位文件
 
 `ask-pro-max` 用于高标准、只读的问题分析；`code-review` 提供结构化代码审查流程，用于规范化和系统化的代码质量评估。
@@ -24,7 +24,7 @@
 ├── hooks/
 │   └── hooks.json
 ├── instructions/
-│   └── python-cli-scripts.instructions.md
+│   └── copilot-thought-logging.instructions.md
 ├── CHANGELOG.md
 └── skills/
     └── code-review/
@@ -46,7 +46,7 @@
 
 ## 当前边界
 
-- 已包含：1 个 custom agent、1 个 skill、1 个 command prompt、1 条 path-specific instruction、1 个空 hooks 占位文件
+- 已包含：1 个 custom agent、1 个 skill、1 个 command prompt、1 条 workspace-wide instruction、1 个空 hooks 占位文件
 - 未包含：非空 hooks 实现
 - 未包含：MCP server
 - 未包含：依赖本地绝对安装路径的分发逻辑
