@@ -1,62 +1,63 @@
 ---
-applyTo: '**'
-description: 'See process Copilot is following where you can edit this to reshape the interaction or save when follow up may be needed'
+description: "Use when: the user explicitly asks to create or update Copilot-Processing.md, keep a temporary work log or progress file in the workspace, write phased execution notes, step-by-step checklist tracking, handoff notes, or asks in Chinese for 过程跟踪, 进度记录, 工作日志, 临时交接说明, 分步骤执行记录, 把过程写到文件里。适用于需要将过程写入工作区临时文件的场景。"
 ---
 
-# Copilot Process tracking Instructions
+# Copilot 会话跟踪工作流
 
-**ABSOLUTE MANDATORY RULES:**
-- You must review these instructions in full before executing any steps to understand the full instructions guidelines.
-- You must follow these instructions exactly as specified without deviation.
-- Do not keep repeating status updates while processing or explanations unless explicitly required. This is bad and will flood Copilot session context.
-- NO phase announcements (no "# Phase X" headers in output)
-- Phases must be executed one at a time and in the exact order specified.
-- NO combining of phases in one response
-- NO skipping of phases
-- NO verbose explanations or commentary
-- Only output the exact text specified in phase instructions
+这是一份按需启用的工作流说明。只有当用户明确要求把过程跟踪写入工作区文件时，才使用这份说明，例如写入 `Copilot-Processing.md`。
 
-# Phase 1: Initialization
+## 优先级与适用范围
 
-- Create file `\Copilot-Processing.md` in workspace root
-- Populate `\Copilot-Processing.md` with user request details
-- Work silently without announcements until complete.
-- When this phase is complete keep mental note of this that <Phase 1> is done and does not need to be repeated.
+- 这份工作流是补充性指导，不是高优先级硬规则。
+- 不要覆盖 system、developer、mode、tool、安全或仓库级指令。
+- 如果当前环境不允许编辑文件，或者要求持续输出进度更新，应优先遵守更高优先级规则，并据此调整本工作流。
+- 不要默认所有任务都需要过程跟踪文件。只有当用户明确提出时才启用。
 
-# Phase 2: Planning
+## 何时使用
 
-- Generate an action plan into the `\Copilot-Processing.md` file.
-- Generate detailed and granular task specific action items to be used for tracking each action plan item with todo/complete status in the file `\Copilot-Processing.md`.
-- This should include:
-  - Specific tasks for each action item in the action plan as a phase.
-  - Clear descriptions of what needs to be done
-  - Any dependencies or prerequisites for each task
-  - Ensure tasks are granular enough to be executed one at a time
-- Work silently without announcements until complete.
-- When this phase is complete keep mental note of this that <Phase 2> is done and does not need to be repeated.
+当用户明确提出以下需求或近似表达时，启用这份工作流：
 
-# Phase 3: Execution
+- 创建或更新 `Copilot-Processing.md`
+- 在工作区保留临时工作日志或进度文件
+- 把执行过程分阶段写到文件里
+- 把分步骤清单写到文件里并持续更新
+- 保留临时交接说明或 handoff note
+- 过程跟踪
+- 进度记录
+- 工作日志
+- 临时交接说明
+- 分步骤执行记录
+- 把过程写到文件里
 
-- Execute action items from the action plan in logical groupings/phases
-- Work silently without announcements until complete.
-- Update file `\Copilot-Processing.md` and mark the action item(s) as complete in the tracking.
-- When a phase is complete keep mental note of this that the specific phase from `\Copilot-Processing.md` is done and does not need to be repeated.
-- Repeat this pattern until all action items are complete
+## 执行方式
 
-# Phase 4: Summary
+如果这份工作流已被触发，且当前环境允许编辑文件：
 
-- Add summary to `\Copilot-Processing.md`
-- Work silently without announcements until complete.
-- Execute only when ALL actions complete
-- Inform user: "Added final summary to `\Copilot-Processing.md`."
-- Remind user to review the summary and confirm completion of the process then to remove the file when done so it is not added to the repository.
+1. 在工作区根目录创建或更新 `Copilot-Processing.md`。
+2. 记录用户请求、关键假设和简明清单。
+3. 随着工作推进更新清单状态。
+4. 保持条目简短、聚焦任务本身。
+5. 在任务完成后补一段简短总结。
 
-**ENFORCEMENT RULES:**
-- NEVER write "# Phase X" headers in responses
-- NEVER repeat the word "Phase" in output unless explicitly required
-- NEVER provide explanations beyond the exact text specified
-- NEVER combine multiple phases in one response
-- NEVER continue past current phase without user input
-- If you catch yourself being verbose, STOP and provide only required output
-- If you catch yourself about to skip a phase, STOP and go back to the correct phase
-- If you catch yourself combining phases, STOP and perform only the current phase
+## `Copilot-Processing.md` 的内容要求
+
+- 这个文件应当是临时性的、面向执行的，不要写成长篇叙述文档。
+- 优先使用简短章节，例如：请求、假设、清单、状态、总结。
+- 清单项应明确标记为 todo、doing 或 done。
+- 只有在确实影响任务推进时，才记录阻塞项。
+- 不要把冗长推理过程原样倾倒进文件。
+
+## 与用户沟通的要求
+
+- 如果当前会话模式要求持续输出进度更新，就继续正常向用户汇报。
+- 除非用户明确要求阶段性确认，否则不要每完成一步就停下来等待批准。
+- 不要声称这份工作流要求“静默执行”，如果当前会话规则要求可见进度输出，应服从更高优先级规则。
+- 只有在确实创建或更新了跟踪文件时，才在最终回复中提到它。
+
+## 完成后的处理
+
+当这份工作流确实被使用时：
+
+- 在 `Copilot-Processing.md` 中补一段简短总结。
+- 告知用户总结已经写入。
+- 提醒用户这是临时文件，不再需要时可以删除。
