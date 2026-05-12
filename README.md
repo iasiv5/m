@@ -6,10 +6,9 @@
 
 | Plugin | Included assets |
 | --- | --- |
-| `iec-plugin-demo` | `ask-pro-max` agent、`code-review` skill、`ask-pro-max` command prompt、`python-cli-scripts` instruction、空 hooks 占位 |
+| `iec-plugin-demo` | `ask-pro-max` agent、`code-review` skill、`ask-pro-max` command prompt、`copilot-thought-logging` instruction、空 hooks 占位 |
 
 ## 仓库结构
-
 ```text
 .
 ├── .github/
