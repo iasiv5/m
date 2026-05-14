@@ -1,6 +1,6 @@
 # iasiv5 Copilot Marketplace
 
-这是一个 GitHub Copilot marketplace 风格仓库：根目录负责暴露 marketplace 元数据，实际可安装插件放在 `plugins/` 下。
+这是一个 GitHub Copilot marketplace 仓库
 
 当前已提供 1 个插件：
 
@@ -17,44 +17,41 @@
 │       └── marketplace.json
 ├── plugins/
 │   └── iec-plugin-demo/
-│       ├── .github/plugin/plugin.json
-│       ├── agents/
-│       ├── commands/
-│       ├── hooks/
-│       ├── instructions/
-│       ├── skills/
-│       ├── CHANGELOG.md
-│       └── README.md
 ├── INSTALL.md
 └── README.md
 ```
 
-## 架构说明
+## 安装与启用
 
-- 根目录 `.github/plugin/marketplace.json` 声明 marketplace，并通过 `pluginRoot: "./plugins"` 暴露子插件。
-- 每个插件在 `plugins/<name>/` 下自包含自己的 runtime 资产和 `.github/plugin/plugin.json`。
-- 这种结构与 `awesome-copilot` 的多插件分发方式一致，后续新增第二个、第三个插件时不需要再重构根目录。
+请将仓库 `iasiv5/m` 作为 marketplace 源添加，并在其中选择安装 `iec-plugin-demo`。
 
-## 安装方式
+### 前提
 
-请把仓库 `iasiv5/m` 当作 marketplace 源添加，然后选择安装其中的 `iec-plugin-demo`。
+- VS Code 版本支持 GitHub Copilot Agent Plugins（预览功能）
+- 已开启设置 `chat.plugins.enabled`
 
-详细安装步骤见 [`INSTALL.md`](INSTALL.md)。
+### 安装步骤
 
-## 当前边界
+当前仓库采用 marketplace 结构，根目录不再作为单个插件直接安装；请通过 marketplace 入口安装其中的子插件。
 
-- 已包含：1 个 custom agent、1 个 skill、1 个 command prompt、1 条 path-specific instruction、1 个空 hooks 占位文件
-- 未包含：非空 hooks 实现
-- 未包含：MCP server
-- 未包含：依赖用户本地绝对安装路径的分发结构
+1. 在支持 marketplace 的入口添加仓库 `iasiv5/m`
+2. 在该 marketplace 中选择并安装插件 `iec-plugin-demo`
+3. 完成安装后重新打开一个 Copilot Chat 会话
 
-## 后续新增插件
+### 验证
 
-后续新增插件时，只需要：
+- 打开 Chat 的插件列表，确认 `iec-plugin-demo` 已启用
+- 输入 `/`，确认能看到 `code-review` 和 `Ask Pro Max`
+- 发送一条代码审查请求，或手动触发 `Ask Pro Max`，检查插件资产是否可被调用
 
-1. 创建 `plugins/<new-plugin>/`
-2. 添加 `plugins/<new-plugin>/.github/plugin/plugin.json`
-3. 把该插件资产放到自己的目录里
-4. 在根 `.github/plugin/marketplace.json` 追加一条插件记录
+### 常见问题
+
+如果提示“这似乎不是有效的插件市场”：
+
+1. 确认远程仓库已包含根目录 `.github/plugin/marketplace.json`
+2. 刷新或重试安装入口，避免命中旧缓存
+3. 确认你已经在 marketplace 列表中继续选择并安装 `iec-plugin-demo`
+
+如果你只是添加了仓库源，但没有继续选择插件项，插件不会自动启用。
 
 `iec-plugin-demo` 的插件级说明见 [`plugins/iec-plugin-demo/README.md`](plugins/iec-plugin-demo/README.md)。
