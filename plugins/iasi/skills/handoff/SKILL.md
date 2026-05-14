@@ -1,30 +1,35 @@
 ---
-name: Handoff Strict
-description: "Create a high-fidelity handoff summary for continuing work in a fresh GitHub Copilot chat. Use when the current chat is long, has been compacted, context quality is degrading, or the context window is nearing capacity."
-argument-hint: "Optional: what the next chat should continue"
-agent: agent
-tools: [execute, read, search, todo]
+name: handoff
+description: "为新的 GitHub Copilot chat 生成高保真交接上下文。适用于当前对话过长、已压缩、上下文质量下降，或用户明确要求 'handoff'、'交接一下'、'生成交接总结'、'新开 chat 接着做'、'create a handoff summary'、'continue in a new chat' 时。基于只读证据生成可直接粘贴到新 chat 的 HANDOFF CONTEXT。"
 ---
 
-You are running the Handoff Strict prompt.
+# Handoff Skill
 
-Your job is to create a self-contained, evidence-backed handoff summary for a fresh GitHub Copilot chat with minimal context loss.
+Use this skill to create a self-contained, evidence-backed handoff summary for a fresh GitHub Copilot chat with minimal context loss.
 
-## Purpose
+## When to Use
 
-Use this prompt when:
+Use this skill when:
 - the current chat context is getting too long and quality is degrading
 - the context window is approaching capacity
 - the chat has been compacted, summarized, or partially compressed
 - the user wants to start fresh while preserving essential context from this chat
+- the user explicitly asks for a handoff, continuation summary, or new-chat context package
 
-This is a strict handoff.
+This is a strict handoff workflow.
 Favor evidence over fluency.
 Do not guess.
 
----
+## Hard Invariants
 
-# PHASE 0: VALIDATE REQUEST
+- stay read-only while gathering evidence
+- prefer direct evidence over recollection
+- if an evidence source is unavailable, record that explicitly and use Unknown or None instead of guessing
+- USER REQUESTS (AS-IS) and EXPLICIT CONSTRAINTS must be verbatim only
+- include only requests or constraints that materially affect scope, implementation, validation, or remaining work
+- do not include secrets, credentials, or tokens
+
+## PHASE 0: VALIDATE REQUEST
 
 Before proceeding, confirm:
 - there is meaningful work or context in this chat to preserve
@@ -32,9 +37,7 @@ Before proceeding, confirm:
 
 If the chat is nearly empty or there is no meaningful context to preserve, say there is nothing substantial to hand off.
 
----
-
-# PHASE 1: GATHER PROGRAMMATIC CONTEXT
+## PHASE 1: GATHER PROGRAMMATIC CONTEXT
 
 Gather concrete evidence using only read-only actions.
 
@@ -98,9 +101,7 @@ Do not:
 
 If any evidence source is unavailable, record that explicitly and continue.
 
----
-
-# PHASE 2: EXTRACT CONTEXT
+## PHASE 2: EXTRACT CONTEXT
 
 Write the context summary from first person perspective:
 - I asked...
@@ -138,12 +139,10 @@ Questions to consider when extracting:
 - which quoted requests or constraints still materially matter?
 - what risks, gotchas, or unknowns remain?
 
----
+## PHASE 3: FORMAT OUTPUT
 
-# PHASE 3: FORMAT OUTPUT
-
-Generate a handoff summary using exactly this structure:
-After HANDOFF CONTEXT, append the continuation instruction block from Phase 4.
+Generate a handoff summary using exactly this structure.
+After HANDOFF CONTEXT, append the continuation instruction block from the final section.
 
 HANDOFF CONTEXT
 ===============
@@ -224,11 +223,9 @@ Strict output rules:
 - do not claim a build or test passed unless that evidence already exists in the session or in outputs you directly inspected
 - if evidence is missing, say Unknown rather than guessing
 
----
+## CONTINUATION BLOCK
 
-# PHASE 4: PROVIDE INSTRUCTIONS
-
-After generating the summary, add this instruction block:
+After generating HANDOFF CONTEXT, add this instruction block:
 
 TO CONTINUE IN A NEW GITHUB COPILOT CHAT:
 
@@ -238,9 +235,7 @@ TO CONTINUE IN A NEW GITHUB COPILOT CHAT:
 
 The new chat should have enough context to continue with minimal loss.
 
----
-
-# IMPORTANT CONSTRAINTS
+## IMPORTANT CONSTRAINTS
 
 - DO NOT attempt to programmatically create a new chat
 - DO provide a self-contained summary that works without access to this chat
@@ -251,11 +246,9 @@ The new chat should have enough context to continue with minimal loss.
 - DO remain read-only while gathering evidence
 - DO prefer same-session history over only the currently visible chat when the chat has been compacted
 
----
-
-# EXECUTE NOW
+## EXECUTE NOW
 
 Begin by gathering programmatic context, then synthesize the handoff summary.
 
-If the user supplied extra instructions when invoking this prompt, use them only to sharpen GOAL, PENDING TASKS, or the first concrete next action.
+If the user supplied extra instructions when invoking this skill, use them only to sharpen GOAL, PENDING TASKS, or the first concrete next action.
 Do not rewrite quoted user requests or explicit constraints.

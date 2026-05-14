@@ -1,6 +1,6 @@
 {
   "name": "iasi",
-  "description": "GitHub Copilot plugin with ask-pro-max, code-review, and one reusable command prompt",
+  "description": "GitHub Copilot plugin with ask-pro-max, two workflow skills, and one reusable command prompt",
   "version": "5.0.0",
   "author": {
     "name": "iasiv5"
@@ -10,7 +10,9 @@
     "copilot-plugin",
     "ask-pro-max",
     "code-review",
-    "prompt"
+    "handoff",
+    "prompt",
+    "skill"
   ],
   "agents": "./agents/",
   "commands": "./commands/",
