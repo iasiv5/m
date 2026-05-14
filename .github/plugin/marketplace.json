@@ -10,10 +10,10 @@
   },
   "plugins": [
     {
-      "name": "iec-plugin-demo",
-      "source": "iec-plugin-demo",
+      "name": "iasi",
+      "source": "iasi",
       "description": "GitHub Copilot plugin with ask-pro-max, code-review, and one reusable command prompt",
-      "version": "4.0.1"
+      "version": "5.0.0"
     }
   ]
 }

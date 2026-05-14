@@ -1,6 +1,6 @@
-# iec-plugin-demo
+# iasi
 
-`iec-plugin-demo` 是当前 marketplace 里的示例 GitHub Copilot 插件，聚焦高标准只读分析与结构化代码审查。
+`iasi` 是当前 marketplace 里的 GitHub Copilot 插件，聚焦高标准只读分析与结构化代码审查。
 
 它包含以下可复用资产：
 
@@ -34,7 +34,7 @@
 
 ## 安装方式
 
-请把仓库 `iasiv5/m` 作为 marketplace 源添加，再选择安装其中的 `iec-plugin-demo`。
+请把仓库 `iasiv5/m` 作为 marketplace 源添加，再选择安装其中的 `iasi`。
 
 如果只添加了 marketplace 源，但没有继续选择插件项，插件不会自动启用。
 

@@ -1,6 +1,13 @@
 # Changelog
 
-All notable changes to `iec-plugin-demo` will be documented in this file.
+All notable changes to `iasi` will be documented in this file.
+
+## [5.0.0] - 2026-05-14
+
+### Changed
+
+- Renamed the published plugin to `iasi`.
+- Updated marketplace metadata, plugin metadata, and installation documentation to use the new plugin name consistently.
 
 ## [4.0.1] - 2026-05-09
 
