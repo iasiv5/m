@@ -1,254 +1,266 @@
 ---
 name: handoff
-description: "为新的 GitHub Copilot chat 生成高保真交接上下文。适用于当前对话过长、已压缩、上下文质量下降，或用户明确要求 'handoff'、'交接一下'、'生成交接总结'、'新开 chat 接着做'、'create a handoff summary'、'continue in a new chat' 时。基于只读证据生成可直接粘贴到新 chat 的 HANDOFF CONTEXT。"
+description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默认只在用户明确表达交接意图时路由到这里，例如直接提到 'handoff'、'交接'、'交接一下'、'生成交接总结'、'给我一份 continuation context'、'create a handoff summary'、'continue in a new chat with a handoff summary'，或明确要求把当前工作整理成可直接粘贴到新 chat 的接续上下文。不要把普通总结、进展同步、代码评审、缺陷分析、方案比较、问题排查、PR/commit/release 摘要、changelog、文章摘要，或仅讨论 handoff 设计本身的请求路由到这里。基于只读证据生成可直接粘贴到新 chat 的 HANDOFF CONTEXT。"
 ---
 
 # Handoff Skill
 
-Use this skill to create a self-contained, evidence-backed handoff summary for a fresh GitHub Copilot chat with minimal context loss.
+这个 skill 用于为新的 GitHub Copilot chat 生成一份自包含、基于证据、上下文损失尽可能小的交接摘要。
 
-## When to Use
+为保证交接格式稳定，最终输出中的固定骨架标题继续保留英文，例如 `HANDOFF CONTEXT`、`USER REQUESTS (AS-IS)`、`GOAL` 等。
 
-Use this skill when:
-- the current chat context is getting too long and quality is degrading
-- the context window is approaching capacity
-- the chat has been compacted, summarized, or partially compressed
-- the user wants to start fresh while preserving essential context from this chat
-- the user explicitly asks for a handoff, continuation summary, or new-chat context package
+## 何时使用
 
-This is a strict handoff workflow.
-Favor evidence over fluency.
-Do not guess.
+在以下场景使用这个 skill：
+- 用户明确要求生成 handoff、交接总结、continuation summary，或要求“新开 chat 接着做”
+- 用户明确要求把当前工作、当前对话或当前实现状态整理成可直接带到新 chat 的接续上下文
+- 当前 chat 已经很长、已经被 compact、或上下文质量开始下降，而且用户明确仍然要把当前工作续接到新 chat
 
-## Hard Invariants
+默认以显式调用为主。
+仅因为当前 chat 很长、回答质量下降或上下文窗口接近上限，不足以单独路由到这里；仍要以用户明确的交接意图为准。
 
-- stay read-only while gathering evidence
-- prefer direct evidence over recollection
-- if an evidence source is unavailable, record that explicitly and use Unknown or None instead of guessing
-- USER REQUESTS (AS-IS) and EXPLICIT CONSTRAINTS must be verbatim only
-- include only requests or constraints that materially affect scope, implementation, validation, or remaining work
-- do not include secrets, credentials, or tokens
+这是一个严格模式的交接工作流。
+证据优先于文采。
+不要猜。
 
-## PHASE 0: VALIDATE REQUEST
+## 不要路由到 handoff
 
-Before proceeding, confirm:
-- there is meaningful work or context in this chat to preserve
-- the user wants a handoff summary now, not just a discussion about handoffs
+以下近邻场景默认不要路由到这个 skill：
+- 普通总结、recap、状态同步，或“你刚刚做了什么”“现在进展怎样”这类回顾请求
+- 代码评审、缺陷分析、方案比较、问题排查、实现建议
+- PR、commit、release 的摘要或 changelog 生成
+- 文章摘要、网页总结、会议纪要、读后总结
+- 仅讨论 handoff skill、prompt、workflow 或协议本身，而不是要生成真实交接摘要
+- 用户只是希望继续在当前 chat 中做事，而不是切到新 chat
 
-If the chat is nearly empty or there is no meaningful context to preserve, say there is nothing substantial to hand off.
+## 硬约束
 
-## PHASE 1: GATHER PROGRAMMATIC CONTEXT
+- 在收集证据阶段保持只读
+- 直接证据优先于回忆
+- 对 `USER REQUESTS (AS-IS)` 和 `EXPLICIT CONSTRAINTS` 先按 materiality 过滤，再 verbatim 复制保留下来的项；如果过滤后为空，写 `None`
+- 如果某个证据源不可用，要明确写出，并使用 `Unknown` 或 `None`，而不是猜测
+- 不要包含 secrets、credentials 或 tokens
 
-Gather concrete evidence using only read-only actions.
+## PHASE 0: 验证请求
 
-Evidence priority, highest to lowest:
-1. same-session history for the current chat, including earlier turns from the same session if the environment can read them
-2. compacted, summarized, or pre-compaction history from the same session, if available
-3. the current visible conversation
-4. current todo state, if available
-5. read-only git inspection
-6. direct reads of files, plans, specs, test outputs, or instructions already referenced in the session
+开始前先确认：
+- 当前 chat 中确实有值得保留的工作或上下文
+- 用户现在就是要交接摘要，而不是只是在讨论 handoff 这件事
+- 用户要的是给新 chat 使用的 continuation context，而不是普通总结或状态同步
 
-Mandatory evidence collection:
-- inspect same-session history, including compacted or earlier turns, if available in this environment
-- inspect the current visible conversation
-- inspect current todo state, if available
-- inspect read-only repository state using terminal commands when needed
-- inspect only the minimum files needed to confirm important facts
-- inspect active project instructions only if they materially constrained the work
+如果当前 chat 几乎没有内容，或者没有任何有价值的上下文要保留，就直接说明没有实质内容可交接。
+遇到近邻场景时，按上文“不要路由到 handoff”处理。
 
-Read-only terminal commands you may use when relevant:
+## PHASE 1: 收集程序化上下文
+
+仅使用只读动作收集具体证据。
+
+证据优先级从高到低如下：
+1. 当前 chat 的同会话历史，包括同一会话中更早的轮次（如果当前环境可读）
+2. 同一会话中的 compact / summarized / pre-compaction 历史（如果可用）
+3. 当前可见对话
+4. 当前 todo 状态（如果可用）
+5. 只读 git 检查
+6. 直接读取当前会话已提到的文件、计划、规格、测试输出或说明文档
+
+必须做的证据收集：
+- 检查同会话历史，包括 compact 后或更早的轮次（如果当前环境可用）
+- 检查当前可见对话
+- 检查当前 todo 状态（如果可用）
+- 需要时用终端做只读仓库检查
+- 只读取足以确认关键事实的最少文件
+- 只有在项目级指令确实影响当前工作时，才读取它们
+
+在相关场景下可用的只读终端命令：
 - git diff --stat HEAD~10..HEAD
 - git status --porcelain
 - rg
 - ls
 - pwd
 
-Suggested execution order:
-1. inspect same-session history, including pre-compaction turns, if available
-2. inspect the current visible conversation
-3. inspect current todo state
-4. inspect git diff/stat
-5. inspect git status
-6. confirm key files, plans, constraints, and decisions by reading only the necessary files
+建议执行顺序：
+1. 检查同会话历史，包括 pre-compaction 轮次（如果可用）
+2. 检查当前可见对话
+3. 检查当前 todo 状态
+4. 检查 git diff/stat
+5. 检查 git status
+6. 只读取必要文件以确认关键文件、计划、约束和决策
 
-If same-session history or todo tooling is unavailable in this environment, start from the current visible conversation and record the missing source explicitly.
-Inspect git or files only when those checks materially improve the handoff.
+如果当前环境没有 same-session history 或 todo 工具，就从当前可见对话开始，并明确记录缺失的证据源。
+只有当 git 或文件检查能实质提升交接质量时，才去做这些检查。
 
-Analyze the gathered evidence to determine:
-- what the user asked for, using exact wording
-- what work was completed
-- what work remains incomplete
-- what decisions were made
-- what files were modified, inspected, or established as important
-- what constraints, preferences, or patterns were established
-- what blockers, caveats, or unresolved questions remain
+收集完证据后，需要回答这些问题：
+- 用户原话到底要求了什么
+- 已经完成了什么工作
+- 还有什么没有完成
+- 做过哪些决策
+- 哪些文件被修改、检查过，或已确认对续接重要
+- 建立了哪些约束、偏好或模式
+- 还剩下哪些阻塞、注意事项或未决问题
 
-Evidence conflict rules:
-- prefer same-session history over the currently visible chat when the chat has been compacted
-- prefer direct file inspection over conversational recollection
-- prefer git state over memory for changed-file claims
-- prefer explicit user instructions over inferred preferences
-- if two sources conflict and neither can be resolved, record the uncertainty instead of choosing one silently
+证据冲突处理规则：
+- 如果 chat 已经被 compact，优先信任同会话历史，而不是当前可见对话
+- 对于文件事实，优先信任直接文件读取，而不是对话回忆
+- 对于文件修改事实，优先信任 git 状态，而不是 memory
+- 优先信任用户显式指令，而不是推断出来的偏好
+- 如果两个来源冲突且无法解决，不要默默选一个，要把不确定性记录下来
 
-Do not:
-- edit files
-- create files
-- mutate git state
-- run install, build, format, or test commands solely to enrich the handoff
-- invent missing facts from memory
-- convert weak inference into strong claims
+不要做这些事：
+- 编辑文件
+- 创建文件
+- 改变 git 状态
+- 仅为了丰富 handoff 而去运行 install、build、format 或 test
+- 用 memory 补造缺失事实
+- 把弱推断包装成强结论
 
-If any evidence source is unavailable, record that explicitly and continue.
+如果任何证据源不可用，明确记下来，然后继续。
 
-## PHASE 2: EXTRACT CONTEXT
+## PHASE 2: 提炼上下文
 
-Write the context summary from first person perspective:
+优先用第一人称视角写交接摘要，例如：
 - I asked...
 - I changed...
 - I decided...
 - I found...
 
-If a fresh chat could misread who acted, explicitly write User..., Agent..., or We... instead of I....
+如果新 chat 可能误判行为主体，就不要写模糊的 `I...`，而要显式写成 `User...`、`Agent...` 或 `We...`。
 
-Focus on:
-- capabilities and behavior, not file-by-file trivia
-- what matters for continuing the work
-- avoiding unnecessary low-level details unless they are critical
-- preserving exact user requests and exact explicit constraints
-- clearly separating verified facts from unknowns
+提炼时聚焦这些点：
+- 聚焦能力、行为和决策，不要陷入琐碎的逐文件细节
+- 只保留对续接真正重要的内容
+- 除非关键，否则避免低层实现细节
+- 保留用户原话请求和显式约束
+- 清楚地区分 verified facts、inferred context 和 unknowns
 
-Hard extraction rules:
-- USER REQUESTS (AS-IS) must be verbatim only
-- EXPLICIT CONSTRAINTS must be verbatim only
-- include only requests or constraints that materially affect scope, implementation, validation, or remaining work
-- omit older quoted material that no longer matters for continuation
-- do not invent constraints, requests, decisions, file roles, or test results
-- include file paths only when they matter for continuation
-- if information is plausible but unverified, either omit it or label it Unknown where relevant
-- do not paraphrase a user instruction if the exact wording matters
+提炼硬规则：
+- 先按 materiality 过滤请求和约束，再 verbatim 复制通过过滤的项到 `USER REQUESTS (AS-IS)` 或 `EXPLICIT CONSTRAINTS`
+- 不要把多个原话拼成一句概括，也不要改写保留下来的原话
+- 如果没有通过 materiality 过滤的项，对应 section 写 `None`；已过期、对继续工作不再重要的引用内容要省略
+- 不要杜撰约束、请求、决策、文件职责或测试结果
+- 只有在路径会影响续接时才写文件路径
+- 如果某个细节看起来合理但没有证据，要么省略，要么标成 `Unknown`
 
-Questions to consider when extracting:
-- what did I ask the agent to do?
-- what did the agent actually complete?
-- what remains pending?
-- what files were changed, inspected, or declared important?
-- what decisions, trade-offs, and constraints must carry forward?
-- what should the next chat do first?
-- what is the first concrete next action for the next chat?
-- which quoted requests or constraints still materially matter?
-- what risks, gotchas, or unknowns remain?
+提炼时重点考虑这些问题：
+- 用户到底让 agent 做什么
+- agent 实际完成了什么
+- 还剩什么没做
+- 哪些文件被修改、检查过，或已经确认重要
+- 哪些决策、取舍和约束必须被带到下一个 chat
+- 下一个 chat 的第一步应该做什么
+- 下一个 chat 最便宜、最具体的下一步动作是什么
+- 哪些引用的用户请求或约束仍然真正重要
+- 还存在哪些风险、坑点或未知项
 
-## PHASE 3: FORMAT OUTPUT
+## PHASE 3: 格式化输出
 
-Generate a handoff summary using exactly this structure.
-After HANDOFF CONTEXT, append the continuation instruction block from the final section.
+严格按下面这套结构生成交接摘要。
+在 `HANDOFF CONTEXT` 之后，再追加最后一节中的 continuation block。
 
 HANDOFF CONTEXT
 ===============
 
 USER REQUESTS (AS-IS)
 ---------------------
-- [Exact verbatim user requests only]
-- [Include only requests that materially affect scope, implementation, validation, or remaining work]
-- [If none materially affect continuation, write: None]
+- [先按 materiality 过滤，再 verbatim 复制仍然影响续接的用户请求]
+- [如果没有任何仍然影响续接的请求，写：None]
 
 GOAL
 ----
-[One sentence or short paragraph describing what should be done next]
+[用一句话或一小段说明接下来应该做什么]
 
 WORK COMPLETED
 --------------
-- [First-person bullet points only when the acting party is unambiguous]
-- [If the actor could be ambiguous, explicitly write User, Agent, or We]
-- [Include workspace-relative file paths when relevant]
-- [Note key implementation or analysis decisions]
+- [只有在行为主体明确时，才用第一人称项目符号]
+- [如果行为主体可能有歧义，显式写 User、Agent 或 We]
+- [在相关时包含 workspace-relative 文件路径]
+- [记录关键实现或分析决策]
 
 CURRENT STATE
 -------------
-- [Current state of the codebase or task]
-- [Known build, test, or repo status only]
-- [Relevant environment or configuration state]
-- [Explicitly note unavailable evidence sources, if any]
+- [当前代码库或任务的状态]
+- [只写已知的 build、test 或 repo 状态]
+- [相关的环境或配置状态]
+- [明确写出不可用的证据源（如果有）]
 
 PENDING TASKS
 -------------
-- [Planned but unfinished tasks]
-- [Next logical steps]
-- [Blockers, open questions, or issues encountered]
-- [Include current todo state if available]
-- [If nothing is pending, write: None]
+- [计划中但尚未完成的事项]
+- [下一步合理动作]
+- [阻塞、开放问题或遇到的问题]
+- [如果可用，包含当前 todo 状态]
+- [如果没有待办，写：None]
 
 KEY FILES
 ---------
-- [path/to/file1] - [brief role description]
-- [path/to/file2] - [brief role description]
-- Maximum 10 files, prioritized by importance
-- Prefer files confirmed by same-session history, git status, git diff/stat, or direct file inspection
-- If no files are important for continuation, write: None
+- [path/to/file1] - [该文件在续接中的作用简述]
+- [path/to/file2] - [该文件在续接中的作用简述]
+- [最多 10 个文件，按重要性排序]
+- [优先列出由同会话历史、git status、git diff/stat 或直接文件读取确认过的文件]
+- [如果没有对续接重要的文件，写：None]
 
 IMPORTANT DECISIONS
 -------------------
-- [Technical decisions and why they were made]
-- [Trade-offs that were accepted]
-- [Patterns or conventions that must be preserved]
-- If there were no durable decisions, write: None
+- [技术决策及其原因]
+- [接受了哪些取舍]
+- [必须延续的模式或约定]
+- [如果没有 durable decisions，写：None]
 
 EXPLICIT CONSTRAINTS
 --------------------
-- [Verbatim constraints only, from the user or active project instructions]
-- [Include only constraints that materially affect continuation]
-- If none, write: None
+- [先按 materiality 过滤，再 verbatim 复制仍然影响续接的逐字约束]
+- [如果没有，写：None]
 
 CONTEXT FOR CONTINUATION
 ------------------------
-- [What the next chat needs to know to continue]
-- [First concrete next action: file, symbol, command, or cheapest validation step, when known]
-- [Warnings, gotchas, and unresolved risks]
-- [References to plans, specs, docs, outputs, or files if relevant]
-- [If there is no additional continuation context, write: None]
+- [下一个 chat 需要知道什么才能继续]
+- [如果已知，给出 first concrete next action：文件、符号、命令，或最便宜的验证步骤]
+- [需要注意的 gotchas、风险和未解决问题]
+- [如有必要，引用计划、规格、文档、输出或文件]
+- [如果没有额外续接上下文，写：None]
 
-Strict output rules:
-- plain text with bullets
-- inside HANDOFF CONTEXT, do not use markdown headings that start with #
-- no bold, italic, or code fences inside the handoff content
-- use workspace-relative file paths
-- keep it continuation-oriented
-- keep GOAL to one sentence or short paragraph
-- do not exceed 10 files in KEY FILES
-- do not include secrets, credentials, or tokens
-- include only verbatim requests or constraints that materially affect continuation
-- do not paraphrase USER REQUESTS (AS-IS)
-- do not paraphrase EXPLICIT CONSTRAINTS
-- do not claim a build or test passed unless that evidence already exists in the session or in outputs you directly inspected
-- if evidence is missing, say Unknown rather than guessing
+输出预算：
+- `USER REQUESTS (AS-IS)`: 0-5 条
+- `GOAL`: 1-3 句
+- `WORK COMPLETED`: 3-7 条
+- `CURRENT STATE`: 2-5 条
+- `PENDING TASKS`: 0-5 条
+- `KEY FILES`: 0-10 条，优先 3-8 条
+- `IMPORTANT DECISIONS`: 0-5 条
+- `EXPLICIT CONSTRAINTS`: 0-5 条
+- `CONTEXT FOR CONTINUATION`: 2-5 条
+- 总量目标：默认控制在约 20-30 个 bullets；只有在确有必要时才超过
+- 如果某个 section 没有有效内容，写 `None`，不要用解释性废话填充
 
-## CONTINUATION BLOCK
+输出硬规则：
+- 使用 plain text 和 bullets
+- 在 `HANDOFF CONTEXT` 内部，不要使用以 `#` 开头的 Markdown 标题
+- 在 handoff 正文中不要使用 bold、italic 或代码围栏
+- 文件路径使用 workspace-relative path
+- 内容只服务于续接；与继续工作无关的信息省略
+- 只写被直接检查过的 build、test、文件或 git 事实；缺证据时写 `Unknown` 或 `None`
+- 其余筛选、保留和预算规则沿用前文，不再重复
 
-After generating HANDOFF CONTEXT, add this instruction block:
+## 续接说明块
+
+生成完 `HANDOFF CONTEXT` 后，再追加下面这段说明：
 
 TO CONTINUE IN A NEW GITHUB COPILOT CHAT:
 
-1. Open a new Copilot chat in VS Code.
-2. Paste the HANDOFF CONTEXT above as the first message.
-3. Add your request: Continue from the handoff context above. [Your next task]
+1. 在 VS Code 中打开一个新的 Copilot chat。
+2. 把上面的 `HANDOFF CONTEXT` 作为第一条消息粘贴进去。
+3. 再补一句你的请求，例如：Continue from the handoff context above. [Your next task]
 
-The new chat should have enough context to continue with minimal loss.
+新 chat 应该能基于这段上下文，以最小损失继续工作。
 
-## IMPORTANT CONSTRAINTS
+## 重要约束
 
 - DO NOT attempt to programmatically create a new chat
 - DO provide a self-contained summary that works without access to this chat
-- DO include workspace-relative file paths
-- DO NOT include sensitive information
-- DO NOT exceed 10 files in the KEY FILES section
-- DO keep the GOAL section short
-- DO remain read-only while gathering evidence
-- DO prefer same-session history over only the currently visible chat when the chat has been compacted
+- DO make the handoff directly pasteable into a new chat as the first message
 
-## EXECUTE NOW
+## 立即执行
 
-Begin by gathering programmatic context, then synthesize the handoff summary.
+按上述顺序收集程序化上下文，然后生成 handoff 摘要。
 
-If the user supplied extra instructions when invoking this skill, use them only to sharpen GOAL, PENDING TASKS, or the first concrete next action.
-Do not rewrite quoted user requests or explicit constraints.
+如果用户在调用这个 skill 时额外给了补充要求，只能用来收紧 `GOAL`、`PENDING TASKS` 或 first concrete next action。
+不要改写被引用的用户请求或显式约束。
