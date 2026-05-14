@@ -34,7 +34,7 @@
 
 ## 安装方式
 
-请把仓库 `iasiv5/m` 作为 marketplace 源添加，再选择安装其中的 `iasi`。
+请把仓库 `iasiv5/m` 作为 marketplace 源添加，再选择安装其中的 `iasi` 插件。
 
 如果只添加了 marketplace 源，但没有继续选择插件项，插件不会自动启用。
 
