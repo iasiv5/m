@@ -1,13 +1,13 @@
 ---
 name: handoff
-description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默认只在用户明确表达交接意图时路由到这里，例如直接提到 'handoff'、'交接'、'交接一下'、'生成交接总结'、'给我一份 continuation context'、'create a handoff summary'、'continue in a new chat with a handoff summary'，或明确要求把当前工作整理成可直接粘贴到新 chat 的接续上下文。不要把普通总结、进展同步、代码评审、缺陷分析、方案比较、问题排查、PR/commit/release 摘要、changelog、文章摘要，或仅讨论 handoff 设计本身的请求路由到这里。基于只读证据生成可直接粘贴到新 chat 的 HANDOFF CONTEXT。"
+description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默认只在用户明确表达交接意图时路由到这里，例如直接提到 'handoff'、'交接'、'交接一下'、'生成交接总结'、'给我一份 continuation context'、'create a handoff summary'、'continue in a new chat with a handoff summary'，或明确要求把当前工作整理成可直接粘贴到新 chat 的接续上下文。不要把普通总结、进展同步、代码评审、缺陷分析、方案比较、问题排查、PR/commit/release 摘要、changelog、文章摘要，或仅讨论 handoff 设计本身的请求路由到这里。基于只读证据生成可直接粘贴到新 chat 的中文优先交接上下文。"
 ---
 
 # Handoff Skill
 
 这个 skill 用于为新的 GitHub Copilot chat 生成一份自包含、基于证据、上下文损失尽可能小的交接摘要。
 
-为保证交接格式稳定，最终输出中的固定骨架标题继续保留英文，例如 `HANDOFF CONTEXT`、`USER REQUESTS (AS-IS)`、`GOAL` 等。
+默认情况下，最终输出中的固定骨架标题和续接说明使用中英文双语对照；正文内容、空值占位和动作说明使用中文优先。只有在用户明确要求纯英文或双语正文时，才改用对应格式。
 
 ## 何时使用
 
@@ -37,8 +37,8 @@ description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默
 
 - 在收集证据阶段保持只读
 - 直接证据优先于回忆
-- 对 `USER REQUESTS (AS-IS)` 和 `EXPLICIT CONSTRAINTS` 先按 materiality 过滤，再 verbatim 复制保留下来的项；如果过滤后为空，写 `None`
-- 如果某个证据源不可用，要明确写出，并使用 `Unknown` 或 `None`，而不是猜测
+- 对 `用户请求（保留原话） / USER REQUESTS (AS-IS)` 和 `显式约束 / EXPLICIT CONSTRAINTS` 先按 materiality 过滤，再 verbatim 复制保留下来的项；如果过滤后为空，写 `无`
+- 如果某个证据源不可用，要明确写出，并使用 `未知` 或 `无`，而不是猜测
 - 不要包含 secrets、credentials 或 tokens
 
 ## PHASE 0: 验证请求
@@ -118,12 +118,12 @@ description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默
 ## PHASE 2: 提炼上下文
 
 优先用第一人称视角写交接摘要，例如：
-- I asked...
-- I changed...
-- I decided...
-- I found...
+- 我要求...
+- 我修改了...
+- 我决定...
+- 我发现...
 
-如果新 chat 可能误判行为主体，就不要写模糊的 `I...`，而要显式写成 `User...`、`Agent...` 或 `We...`。
+如果新 chat 可能误判行为主体，就不要写模糊的“我……”，而要显式写成“用户……”、“智能体……”或“我们……”。
 
 提炼时聚焦这些点：
 - 聚焦能力、行为和决策，不要陷入琐碎的逐文件细节
@@ -133,12 +133,12 @@ description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默
 - 清楚地区分 verified facts、inferred context 和 unknowns
 
 提炼硬规则：
-- 先按 materiality 过滤请求和约束，再 verbatim 复制通过过滤的项到 `USER REQUESTS (AS-IS)` 或 `EXPLICIT CONSTRAINTS`
+- 先按 materiality 过滤请求和约束，再 verbatim 复制通过过滤的项到 `用户请求（保留原话） / USER REQUESTS (AS-IS)` 或 `显式约束 / EXPLICIT CONSTRAINTS`
 - 不要把多个原话拼成一句概括，也不要改写保留下来的原话
-- 如果没有通过 materiality 过滤的项，对应 section 写 `None`；已过期、对继续工作不再重要的引用内容要省略
+- 如果没有通过 materiality 过滤的项，对应部分写 `无`；已过期、对继续工作不再重要的引用内容要省略
 - 不要杜撰约束、请求、决策、文件职责或测试结果
 - 只有在路径会影响续接时才写文件路径
-- 如果某个细节看起来合理但没有证据，要么省略，要么标成 `Unknown`
+- 如果某个细节看起来合理但没有证据，要么省略，要么标成 `未知`
 
 提炼时重点考虑这些问题：
 - 用户到底让 agent 做什么
@@ -154,113 +154,114 @@ description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默
 ## PHASE 3: 格式化输出
 
 严格按下面这套结构生成交接摘要。
-在 `HANDOFF CONTEXT` 之后，再追加最后一节中的 continuation block。
+在 `交接上下文 / HANDOFF CONTEXT` 之后，再追加最后一节中的续接说明块。
 
-HANDOFF CONTEXT
-===============
+交接上下文 / HANDOFF CONTEXT
+============================
 
-USER REQUESTS (AS-IS)
----------------------
+用户请求（保留原话） / USER REQUESTS (AS-IS)
+-------------------------------------------
 - [先按 materiality 过滤，再 verbatim 复制仍然影响续接的用户请求]
-- [如果没有任何仍然影响续接的请求，写：None]
+- [如果没有任何仍然影响续接的请求，写：无]
 
-GOAL
-----
+目标 / GOAL
+-----------
 [用一句话或一小段说明接下来应该做什么]
 
-WORK COMPLETED
---------------
+已完成工作 / WORK COMPLETED
+--------------------------
 - [只有在行为主体明确时，才用第一人称项目符号]
-- [如果行为主体可能有歧义，显式写 User、Agent 或 We]
+- [如果行为主体可能有歧义，显式写“用户”、“智能体”或“我们”]
 - [在相关时包含 workspace-relative 文件路径]
 - [记录关键实现或分析决策]
 
-CURRENT STATE
--------------
+当前状态 / CURRENT STATE
+------------------------
 - [当前代码库或任务的状态]
 - [只写已知的 build、test 或 repo 状态]
 - [相关的环境或配置状态]
 - [明确写出不可用的证据源（如果有）]
 
-PENDING TASKS
--------------
+待办事项 / PENDING TASKS
+------------------------
 - [计划中但尚未完成的事项]
 - [下一步合理动作]
 - [阻塞、开放问题或遇到的问题]
 - [如果可用，包含当前 todo 状态]
-- [如果没有待办，写：None]
+- [如果没有待办，写：无]
 
-KEY FILES
----------
+关键文件 / KEY FILES
+--------------------
 - [path/to/file1] - [该文件在续接中的作用简述]
 - [path/to/file2] - [该文件在续接中的作用简述]
 - [最多 10 个文件，按重要性排序]
 - [优先列出由同会话历史、git status、git diff/stat 或直接文件读取确认过的文件]
-- [如果没有对续接重要的文件，写：None]
+- [如果没有对续接重要的文件，写：无]
 
-IMPORTANT DECISIONS
--------------------
+重要决策 / IMPORTANT DECISIONS
+-------------------------------
 - [技术决策及其原因]
 - [接受了哪些取舍]
 - [必须延续的模式或约定]
-- [如果没有 durable decisions，写：None]
+- [如果没有稳定决策，写：无]
 
-EXPLICIT CONSTRAINTS
---------------------
+显式约束 / EXPLICIT CONSTRAINTS
+-------------------------------
 - [先按 materiality 过滤，再 verbatim 复制仍然影响续接的逐字约束]
-- [如果没有，写：None]
+- [如果没有，写：无]
 
-CONTEXT FOR CONTINUATION
-------------------------
+续接上下文 / CONTEXT FOR CONTINUATION
+-------------------------------------
 - [下一个 chat 需要知道什么才能继续]
-- [如果已知，给出 first concrete next action：文件、符号、命令，或最便宜的验证步骤]
+- [如果已知，给出第一个具体动作：文件、符号、命令，或最便宜的验证步骤]
 - [需要注意的 gotchas、风险和未解决问题]
 - [如有必要，引用计划、规格、文档、输出或文件]
-- [如果没有额外续接上下文，写：None]
+- [如果没有额外续接上下文，写：无]
 
 输出预算：
-- `USER REQUESTS (AS-IS)`: 0-5 条
-- `GOAL`: 1-3 句
-- `WORK COMPLETED`: 3-7 条
-- `CURRENT STATE`: 2-5 条
-- `PENDING TASKS`: 0-5 条
-- `KEY FILES`: 0-10 条，优先 3-8 条
-- `IMPORTANT DECISIONS`: 0-5 条
-- `EXPLICIT CONSTRAINTS`: 0-5 条
-- `CONTEXT FOR CONTINUATION`: 2-5 条
+- `用户请求（保留原话） / USER REQUESTS (AS-IS)`: 0-5 条
+- `目标 / GOAL`: 1-3 句
+- `已完成工作 / WORK COMPLETED`: 3-7 条
+- `当前状态 / CURRENT STATE`: 2-5 条
+- `待办事项 / PENDING TASKS`: 0-5 条
+- `关键文件 / KEY FILES`: 0-10 条，优先 3-8 条
+- `重要决策 / IMPORTANT DECISIONS`: 0-5 条
+- `显式约束 / EXPLICIT CONSTRAINTS`: 0-5 条
+- `续接上下文 / CONTEXT FOR CONTINUATION`: 2-5 条
 - 总量目标：默认控制在约 20-30 个 bullets；只有在确有必要时才超过
-- 如果某个 section 没有有效内容，写 `None`，不要用解释性废话填充
+- 如果某个部分没有有效内容，写 `无`，不要用解释性废话填充
 
 输出硬规则：
 - 使用 plain text 和 bullets
-- 在 `HANDOFF CONTEXT` 内部，不要使用以 `#` 开头的 Markdown 标题
+- 在 `交接上下文 / HANDOFF CONTEXT` 正文内部，不要使用以 `#` 开头的 Markdown 标题
+- 固定骨架标题使用中英文双语对照；正文内容、空值占位和动作说明默认中文优先
 - 在 handoff 正文中不要使用 bold、italic 或代码围栏
 - 文件路径使用 workspace-relative path
 - 内容只服务于续接；与继续工作无关的信息省略
-- 只写被直接检查过的 build、test、文件或 git 事实；缺证据时写 `Unknown` 或 `None`
+- 只写被直接检查过的 build、test、文件或 git 事实；缺证据时写 `未知` 或 `无`
 - 其余筛选、保留和预算规则沿用前文，不再重复
 
 ## 续接说明块
 
-生成完 `HANDOFF CONTEXT` 后，再追加下面这段说明：
+生成完 `交接上下文 / HANDOFF CONTEXT` 后，再追加下面这段说明：
 
-TO CONTINUE IN A NEW GITHUB COPILOT CHAT:
+在新的 GitHub Copilot Chat 中继续 / TO CONTINUE IN A NEW GITHUB COPILOT CHAT：
 
 1. 在 VS Code 中打开一个新的 Copilot chat。
-2. 把上面的 `HANDOFF CONTEXT` 作为第一条消息粘贴进去。
-3. 再补一句你的请求，例如：Continue from the handoff context above. [Your next task]
+2. 把上面的“交接上下文 / HANDOFF CONTEXT”作为第一条消息粘贴进去。
+3. 再补一句你的请求，例如：继续基于上面的交接上下文 / HANDOFF CONTEXT 处理：[你的下一个任务]
 
 新 chat 应该能基于这段上下文，以最小损失继续工作。
 
 ## 重要约束
 
-- DO NOT attempt to programmatically create a new chat
-- DO provide a self-contained summary that works without access to this chat
-- DO make the handoff directly pasteable into a new chat as the first message
+- 不要尝试以编程方式创建新 chat
+- 要提供一份不依赖当前 chat 也能使用的自包含摘要
+- 要让 handoff 能直接作为新 chat 的第一条消息粘贴使用
 
 ## 立即执行
 
 按上述顺序收集程序化上下文，然后生成 handoff 摘要。
 
-如果用户在调用这个 skill 时额外给了补充要求，只能用来收紧 `GOAL`、`PENDING TASKS` 或 first concrete next action。
+如果用户在调用这个 skill 时额外给了补充要求，只能用来收紧 `目标 / GOAL`、`待办事项 / PENDING TASKS` 或“第一个具体动作”。
 不要改写被引用的用户请求或显式约束。

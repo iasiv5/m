@@ -1,7 +1,7 @@
 {
   "name": "iasi",
   "description": "GitHub Copilot plugin with ask-pro-max, two workflow skills, and one reusable command prompt",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "author": {
     "name": "iasiv5"
   },
