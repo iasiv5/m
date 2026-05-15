@@ -1,6 +1,7 @@
 ---
 name: handoff
-description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默认只在用户明确表达交接意图时路由到这里，例如直接提到 'handoff'、'交接'、'交接一下'、'生成交接总结'、'给我一份 continuation context'、'create a handoff summary'、'continue in a new chat with a handoff summary'，或明确要求把当前工作整理成可直接粘贴到新 chat 的接续上下文。不要把普通总结、进展同步、代码评审、缺陷分析、方案比较、问题排查、PR/commit/release 摘要、changelog、文章摘要，或仅讨论 handoff 设计本身的请求路由到这里。基于只读证据生成可直接粘贴到新 chat 的中文优先交接上下文。"
+description: "为新的 GitHub Copilot chat 生成面向下一会话目标的 handoff / continuation context。仅在用户明确要把当前工作交接到新 chat 继续时触发；不要用于普通总结、状态同步、代码评审、changelog 或文章摘要。基于只读证据输出可直接粘贴到新 chat 的中文优先接续上下文。"
+argument-hint: "下一个 chat 主要要做什么？"
 ---
 
 # Handoff Skill
@@ -47,6 +48,7 @@ description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默
 - 当前 chat 中确实有值得保留的工作或上下文
 - 用户现在就是要交接摘要，而不是只是在讨论 handoff 这件事
 - 用户要的是给新 chat 使用的 continuation context，而不是普通总结或状态同步
+- 如果用户额外说明了下一个 chat 的目标、用途或焦点，把它视为首要筛选条件，只保留对该目标真正有帮助的上下文
 
 如果当前 chat 几乎没有内容，或者没有任何有价值的上下文要保留，就直接说明没有实质内容可交接。
 遇到近邻场景时，按上文“不要路由到 handoff”处理。
@@ -136,6 +138,7 @@ description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默
 - 先按 materiality 过滤请求和约束，再 verbatim 复制通过过滤的项到 `用户请求（保留原话） / USER REQUESTS (AS-IS)` 或 `显式约束 / EXPLICIT CONSTRAINTS`
 - 不要把多个原话拼成一句概括，也不要改写保留下来的原话
 - 如果没有通过 materiality 过滤的项，对应部分写 `无`；已过期、对继续工作不再重要的引用内容要省略
+- 如果关键信息已经稳定存在于 PRD、计划、ADR、issue、commit、diff 或其他工件中，不要在 handoff 中重复展开；只引用其路径或 URL，并说明它为何与续接相关
 - 不要杜撰约束、请求、决策、文件职责或测试结果
 - 只有在路径会影响续接时才写文件路径
 - 如果某个细节看起来合理但没有证据，要么省略，要么标成 `未知`
@@ -210,6 +213,11 @@ description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默
 - [先按 materiality 过滤，再 verbatim 复制仍然影响续接的逐字约束]
 - [如果没有，写：无]
 
+建议技能 / SUGGESTED SKILLS
+--------------------------
+- [列出下一个 chat 应优先调用的 skills、agents 或关键工具，并给出一句理由]
+- [如果没有明确建议，写：无]
+
 续接上下文 / CONTEXT FOR CONTINUATION
 -------------------------------------
 - [下一个 chat 需要知道什么才能继续]
@@ -227,6 +235,7 @@ description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默
 - `关键文件 / KEY FILES`: 0-10 条，优先 3-8 条
 - `重要决策 / IMPORTANT DECISIONS`: 0-5 条
 - `显式约束 / EXPLICIT CONSTRAINTS`: 0-5 条
+- `建议技能 / SUGGESTED SKILLS`: 0-5 条
 - `续接上下文 / CONTEXT FOR CONTINUATION`: 2-5 条
 - 总量目标：默认控制在约 20-30 个 bullets；只有在确有必要时才超过
 - 如果某个部分没有有效内容，写 `无`，不要用解释性废话填充
@@ -263,5 +272,5 @@ description: "为新的 GitHub Copilot chat 生成高保真交接上下文。默
 
 按上述顺序收集程序化上下文，然后生成 handoff 摘要。
 
-如果用户在调用这个 skill 时额外给了补充要求，只能用来收紧 `目标 / GOAL`、`待办事项 / PENDING TASKS` 或“第一个具体动作”。
+如果用户在调用这个 skill 时额外给了补充要求，优先把它当作下一个 chat 的工作焦点；它只能用来收紧 `目标 / GOAL`、`待办事项 / PENDING TASKS`、`建议技能 / SUGGESTED SKILLS` 或“第一个具体动作”。
 不要改写被引用的用户请求或显式约束。
