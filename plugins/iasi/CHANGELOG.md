@@ -2,6 +2,18 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.5.0] - 2026-05-16
+
+### Added
+
+- Published the `plan-pro-max` custom agent as a user-invocable design-first planning mode.
+
+### Changed
+
+- Reworked `plan-pro-max` from the stock Plan agent body into a design-first workflow with explicit design approval, one-question-at-a-time clarification, option comparison, strongest-counterargument checks, and post-approval implementation planning.
+- Updated plugin documentation, marketplace documentation, plugin metadata, and marketplace metadata so they reflect two published agents, three published skills, and one reusable command prompt.
+- Bumped the published plugin version metadata to `5.5.0` in both the plugin manifest and marketplace entry.
+
 ## [5.4.0] - 2026-05-15
 
 ### Removed

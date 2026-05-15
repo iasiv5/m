@@ -6,7 +6,7 @@
 
 | 插件 | 包含内容 |
 | --- | --- |
-| `iasi` | `Ask Pro Max` agent、`brainstorming` skill、`writing-plans` skill、`handoff` skill、`Ask Pro Max` 命令、`copilot-thought-logging` instruction，以及 hooks 占位资源 |
+| `iasi` | `Ask Pro Max` agent、`Plan Pro Max` agent、`brainstorming` skill、`writing-plans` skill、`handoff` skill、`Ask Pro Max` 命令、`copilot-thought-logging` instruction，以及 hooks 占位资源 |
 
 ## 仓库结构
 ```text
@@ -41,8 +41,9 @@
 ### 验证
 
 - 打开 Copilot Chat 的插件列表，确认 `iasi` 已启用
+- 打开 agent mode 选择器，确认可以看到 `Ask Pro Max` 和 `Plan Pro Max`
 - 输入 `/`，确认可以看到 `brainstorming`、`writing-plans`、`handoff` 和 `Ask Pro Max`
-- 发送一条需求澄清、实施计划或交接总结请求，或手动触发 `Ask Pro Max`，确认相关插件资产可正常调用
+- 发送一条需求澄清、实施计划、交接总结或只读分析请求，或手动切换到 `Ask Pro Max` / `Plan Pro Max`，确认相关插件资产可正常调用
 
 ### 常见问题
 
