@@ -106,17 +106,14 @@
 正文结束 / END OF HANDOFF CONTEXT
 =================================
 ```
+把 handoff 粘贴到新 chat 时，直接使用上面的代码块内容；
+如果聊天界面提供复制按钮，优先点复制，不要把下面的说明区一起复制。
 
-以下内容不是 handoff 正文。
-把 handoff 粘贴到新 chat 时，直接使用上面的代码块内容；如果聊天界面提供复制按钮，优先点复制，不要把下面的说明区一起复制。
-
-使用说明（不属于 handoff 正文） / INSTRUCTIONS (NOT PART OF HANDOFF)
+使用说明 / INSTRUCTIONS (NOT PART OF HANDOFF)
 ---------------------------------------------------------------------
 
-在新的 GitHub Copilot Chat 中继续 / TO CONTINUE IN A NEW GITHUB COPILOT CHAT：
-
 1. 在 GitHub Copilot 中打开一个新的 chat 或者新建会话。
-2. 直接复制上面的代码块内容；如果界面显示复制按钮，优先使用复制按钮。
-3. 再补一句你的请求，例如：继续基于上面的交接上下文 / HANDOFF CONTEXT 处理：[你的下一个任务]
+2. 直接复制上面的『交接上下文』。
+3. 再补一句你的请求，例如：**继续基于上面的交接上下文：[你的下一个任务]**。
 
 新 chat 应该能基于这段上下文，以最小损失继续工作。
