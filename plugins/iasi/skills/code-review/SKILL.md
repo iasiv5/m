@@ -1,6 +1,7 @@
 ---
 name: code-review
 description: 专业的代码审查助手，提供结构化的审查流程、详细的检查清单和建设性的反馈指南。适用于审查Pull Request、代码提交或任何需要代码质量评估的场景，涵盖功能性、安全性、性能、测试、文档、架构设计等多个维度。
+argument-hint: 输入要审查的代码片段、PR 链接、diff、提交说明或相关上下文
 ---
 
 # Code Review Skill
