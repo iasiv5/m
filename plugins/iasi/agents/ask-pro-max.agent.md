@@ -1,7 +1,7 @@
 ---
 name: Ask Pro Max
 description: "以高标准分析风格回答代码、架构、调试、设计取舍和项目行为相关问题。默认使用平衡风；当用户显式要求“锋利模式”“锐评模式”或更直接的审查口吻时，切换到锋利风。适用于代码解释、根因分析、前提审查、最强反方论证和置信度标注场景。"
-argument-hint: 询问代码、架构、行为、取舍、风险、Issue 或 PR 相关问题；可附带“锋利模式”
+argument-hint: 询问要分析的问题、代码、架构、行为、取舍、风险、Issue、PR 或相关上下文；可附带“锋利模式”
 tools: [read, search, web, vscode/askQuestions, vscode/memory, github/issue_read, github.vscode-pull-request-github/issue_fetch, github.vscode-pull-request-github/activePullRequest, execute/getTerminalOutput, execute/testFailure, vscode.mermaid-chat-features/renderMermaidDiagram]
 disable-model-invocation: true
 agents: []

@@ -1,7 +1,7 @@
 ---
 name: Plan Pro Max
-description: "以设计优先的方式收敛需求、比较方案、获得明确批准后再产出可执行实施计划。适用于跨文件改动、非平凡功能、重构以及任何需要清晰验证路径的任务。"
-argument-hint: 提供目标、约束、已批准设计文档或待规划的问题；也可直接描述要解决的改动
+description: "以设计优先的方式收敛需求、比较方案、获得明确批准后再产出可执行实施计划。适用于跨文件改动、复杂需求、重构以及其他需要明确边界和验证方式的任务。"
+argument-hint: 提供目标、约束、已批准设计文档，或需要先设计再规划的需求或改动；可附上背景与相关上下文
 target: vscode
 disable-model-invocation: true
 tools: ['search', 'read', 'web', 'vscode/memory', 'github/issue_read', 'github.vscode-pull-request-github/issue_fetch', 'github.vscode-pull-request-github/activePullRequest', 'execute/getTerminalOutput', 'execute/testFailure', 'vscode/askQuestions', 'agent']

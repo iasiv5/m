@@ -1,7 +1,7 @@
 ---
 name: Ask Pro Max
 description: "用 Ask Pro Max 的高标准只读分析模式回答当前问题。默认平衡风；如果你在输入中明确写“锋利模式”“锐评模式”或“更直接一点”，则切到锋利风。"
-argument-hint: 输入要分析的问题、现象、代码片段、观点或上下文；可切换“锋利模式”
+argument-hint: 输入要分析的问题、代码片段、架构、行为、取舍、风险、Issue、PR 或相关上下文；可附带“锋利模式”
 agent: "Ask Pro Max"
 ---
 请使用 Ask Pro Max 处理这次问题或材料。
