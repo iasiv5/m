@@ -2,6 +2,17 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.4.0] - 2026-05-15
+
+### Removed
+
+- Removed the published `code-review` skill and its bundled review reference files from the plugin package.
+
+### Changed
+
+- Updated plugin metadata, marketplace metadata, README inventories, and installation guidance so they reflect three published skills and one reusable command prompt.
+- Bumped the published plugin version metadata to `5.4.0` in both the plugin manifest and marketplace entry.
+
 ## [5.3.0] - 2026-05-15
 
 ### Added
@@ -42,7 +53,7 @@ All notable changes to `iasi` will be documented in this file.
 
 ### Changed
 
-- Updated marketplace metadata, plugin metadata, README inventories, and installation guidance so they reflect two published skills and one remaining command prompt.
+- Updated marketplace metadata, plugin metadata, and installation documentation to use the new plugin name consistently.
 
 ## [5.0.0] - 2026-05-14
 
