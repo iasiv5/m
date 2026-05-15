@@ -2,6 +2,20 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.3.0] - 2026-05-15
+
+### Added
+
+- Added the published `brainstorming` skill for manual-first requirement clarification and design document generation.
+- Added the published `writing-plans` skill for turning approved designs or clear requirements into executable implementation plans.
+
+### Changed
+
+- Adapted the new planning skills for GitHub Copilot packaging with Chinese-first prompts, local interface metadata, and lightweight `references/` templates.
+- Explicitly excluded the Superpowers Visual Companion runtime assets and downstream execution/branch-finishing skills from this first published planning workflow.
+- Updated plugin metadata, marketplace entry, README inventories, and installation guidance so they reflect four published skills and one reusable command prompt.
+- Bumped the published plugin version metadata to `5.3.0` in both the plugin manifest and marketplace entry.
+
 ## [5.2.1] - 2026-05-14
 
 ### Changed

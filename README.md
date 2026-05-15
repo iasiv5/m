@@ -6,7 +6,7 @@
 
 | 插件 | 包含内容 |
 | --- | --- |
-| `iasi` | `Ask Pro Max` agent、`code-review` skill、`handoff` skill、`Ask Pro Max` 命令、`copilot-thought-logging` instruction，以及 hooks 占位资源 |
+| `iasi` | `Ask Pro Max` agent、`brainstorming` skill、`writing-plans` skill、`code-review` skill、`handoff` skill、`Ask Pro Max` 命令、`copilot-thought-logging` instruction，以及 hooks 占位资源 |
 
 ## 仓库结构
 ```text
@@ -41,8 +41,8 @@
 ### 验证
 
 - 打开 Copilot Chat 的插件列表，确认 `iasi` 已启用
-- 输入 `/`，确认可以看到 `code-review`、`handoff` 和 `Ask Pro Max`
-- 发送一条代码审查请求、交接总结请求，或手动触发 `Ask Pro Max`，确认相关插件资产可正常调用
+- 输入 `/`，确认可以看到 `brainstorming`、`writing-plans`、`code-review`、`handoff` 和 `Ask Pro Max`
+- 发送一条需求澄清、实施计划、代码审查或交接总结请求，或手动触发 `Ask Pro Max`，确认相关插件资产可正常调用
 
 ### 常见问题
 
