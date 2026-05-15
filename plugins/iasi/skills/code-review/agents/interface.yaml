@@ -1,7 +1,7 @@
 interface:
-  display_name: "Handoff 交接"
-  short_description: "为新的 GitHub Copilot chat 生成面向下一任务的接续上下文"
-  default_prompt: "使用 $handoff，围绕我接下来要继续的任务，为新的 GitHub Copilot chat 生成接续上下文。"
+  display_name: "Code Review 代码审查"
+  short_description: "对代码、PR 或提交进行结构化审查并给出重点反馈"
+  default_prompt: "使用 $code-review 审查这次代码或变更，优先指出 bug、风险、行为回归和测试缺口。"
 compatibility:
   canonical_format: "agent-skills"
   adapter_targets:
