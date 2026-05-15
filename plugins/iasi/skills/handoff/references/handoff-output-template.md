@@ -5,6 +5,13 @@
 在填充模板前，先根据“下一个 chat 要做什么”重新做一次 materiality 筛选。
 如果信息已经稳定存在于 PRD、计划、ADR、issue、commit、diff 或其他工件中，只引用路径或 URL，不要在 handoff 中重复展开。
 
+输出包装规则：
+- 把从“交接上下文 / HANDOFF CONTEXT”到“正文结束 / END OF HANDOFF CONTEXT”为止的全部正文，整体放进一个单独的 fenced code block 中。
+- 代码块语言标识留空，让聊天界面尽量按纯文本代码块展示，并提供复制按钮。
+- “使用说明（不属于 handoff 正文）”必须放在代码块外面，避免用户一键复制时把说明区一起带走。
+- 在这个外层代码块内部，不要再嵌套代码块。
+
+```
 交接上下文 / HANDOFF CONTEXT
 ============================
 
@@ -90,16 +97,26 @@
 - 使用 plain text 和 bullets
 - 在 `交接上下文 / HANDOFF CONTEXT` 正文内部，不要使用以 `#` 开头的 Markdown 标题
 - 固定骨架标题使用中英文双语对照；正文内容、空值占位和动作说明默认中文优先
-- 在 handoff 正文中不要使用 bold、italic 或代码围栏
+- handoff 正文整体要放在单个外层代码块里，但正文内部不要再嵌套 bold、italic 或代码围栏
 - 文件路径使用 workspace-relative path
 - 内容只服务于续接；与继续工作无关的信息省略
 - 只写被直接检查过的 build、test、文件或 git 事实；缺证据时写 `未知` 或 `无`
 - 其余筛选、保留和预算规则沿用 SKILL.md，不再重复
 
+正文结束 / END OF HANDOFF CONTEXT
+=================================
+```
+
+以下内容不是 handoff 正文。
+把 handoff 粘贴到新 chat 时，直接使用上面的代码块内容；如果聊天界面提供复制按钮，优先点复制，不要把下面的说明区一起复制。
+
+使用说明（不属于 handoff 正文） / INSTRUCTIONS (NOT PART OF HANDOFF)
+---------------------------------------------------------------------
+
 在新的 GitHub Copilot Chat 中继续 / TO CONTINUE IN A NEW GITHUB COPILOT CHAT：
 
-1. 在 VS Code 中打开一个新的 Copilot chat。
-2. 把上面的“交接上下文 / HANDOFF CONTEXT”作为第一条消息粘贴进去。
+1. 在 GitHub Copilot 中打开一个新的 chat 或者新建会话。
+2. 直接复制上面的代码块内容；如果界面显示复制按钮，优先使用复制按钮。
 3. 再补一句你的请求，例如：继续基于上面的交接上下文 / HANDOFF CONTEXT 处理：[你的下一个任务]
 
 新 chat 应该能基于这段上下文，以最小损失继续工作。
