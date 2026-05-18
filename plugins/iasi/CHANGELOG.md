@@ -2,6 +2,18 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.6.0] - 2026-05-18
+
+### Added
+
+- Added the published `cleanup` skill for end-of-task long-term knowledge cleanup and repository-scoped knowledge reconciliation.
+
+### Changed
+
+- Defined `cleanup` as a conservative, final-state knowledge-synchronization skill that stays separate from `handoff` and normal in-flight document updates.
+- Updated plugin documentation, marketplace documentation, plugin metadata, and marketplace metadata so they reflect two published agents, four published skills, and one reusable command prompt.
+- Bumped the published plugin version metadata to `5.6.0` in both the plugin manifest and marketplace entry.
+
 ## [5.5.0] - 2026-05-16
 
 ### Added
