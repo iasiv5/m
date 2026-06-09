@@ -11,17 +11,6 @@ argument-hint: 请说明要沉淀的任务、范围或收尾目标；可留空
 它不是中途交接工具，也不是普通总结工具。
 它的职责是做终态的知识清理、去重、校正和沉淀。
 
-## 来源致谢
-
-这个适配版本继承了 Khazix `neat-freak` 的核心思想：
-- 原始 skill 地址：
-  https://github.com/KKKKhazix/khazix-skills/tree/main/neat-freak
-- 你是知识编辑，不是记录员
-- 长期知识要保持准确、简洁、可复用
-- 清理动作要优先考虑删旧、合并和纠偏，而不是一味追加
-
-当前实现不是原版照搬，而是面向 GitHub Copilot 的本地化改造版，重点解决 `handoff` 与长期沉淀之间的职责边界。
-
 ## 何时使用
 
 在以下场景使用这个 skill：
