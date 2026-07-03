@@ -58,6 +58,22 @@ MIT License · Copyright (c) 2026 数字生命卡兹克 (Digital Life Khazix)
 
 ---
 
+## grilling / codebase-design / domain-modeling / grill-with-docs / improve-codebase-architecture
+
+致敬 mattpocock/skills 的同名 skill：
+
+- grilling: https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling/
+- codebase-design: https://github.com/mattpocock/skills/tree/main/skills/engineering/codebase-design/
+- domain-modeling: https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling/
+- grill-with-docs: https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs/
+- improve-codebase-architecture: https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture/
+
+MIT License · Copyright (c) 2026 Matt Pocock
+
+这五个 skill 由本目录的 `update.sh` 从 mattpocock/skills 上游原样同步（英文、标准 SKILL.md），保留上游格式、不做中文化适配——Claude Code 与 GitHub Copilot 均直接加载 `.claude/skills` 下标准 SKILL.md，英文原版两个 runtime 均可用。
+
+---
+
 ## 许可证全文
 
 ### MIT License (obra/superpowers, mattpocock/skills, KKKKhazix/khazix-skills)

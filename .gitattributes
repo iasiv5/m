@@ -1,0 +1,6 @@
+# 脚本类文件强制 LF 行尾
+# Windows 下 core.autocrlf=true 会把 git 仓库里的 LF 在 checkout 时转成 CRLF，
+# 而 bash 无法执行 CRLF 脚本（\r 被当成命令字符，报 $'\r': command not found）。
+# eol=lf 覆盖 autocrlf，保证 .sh/.py 在 working tree 始终是 LF，bash 能直接执行。
+*.sh text eol=lf
+*.py text eol=lf
