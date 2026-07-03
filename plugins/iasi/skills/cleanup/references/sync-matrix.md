@@ -34,6 +34,20 @@
 默认优先整理仓库记忆。
 用户记忆只有在用户明确要求时才纳入 cleanup。
 
+## 规范违规 → 处置
+
+规范执行审计发现的违规，按下面原则处理。细则见 [governance.md](governance.md)。
+
+| 发现 | 处置 |
+|---|---|
+| `AGENTS.md`、`CLAUDE.md`、`.github/copilot-instructions.md` 多个入口承载实质规则且没有明确同源关系 | 待用户拍板；需要确认权威入口和合并方向 |
+| 入口文件只是软链、include、`@AGENTS.md` 或一行转发 | 不算违规；只编辑现场规则声明的权威文件 |
+| README、CHANGELOG、plugin manifest 或 marketplace metadata 的资产清单与实际 skill / agent / prompt / instruction / hook 不一致 | 直接修，属于安全可逆的发布面同步 |
+| 规则文件引用的路径、命令、skill、agent、prompt 或 hook 已确认不存在 | 清掉或改成现行路径；拿不准是否在其他机器 / 分支存在时列为待拍板 |
+| 目录或文件命名违反工作区约定 | 待用户拍板；重命名可能影响脚本、同步工具、外部引用和历史路径 |
+| `.gitignore` 缺少规则明确要求的敏感文件红线 | 直接补齐 |
+| 上下级规则、README 与 customization metadata 互相矛盾 | 能从现实文件和发布面判断现行事实的直接改；否则待用户拍板 |
+
 ## 通用代码 / 文档变更 → 长期知识同步面
 
 | 本次变化 | 需要同步的长期知识载体 |

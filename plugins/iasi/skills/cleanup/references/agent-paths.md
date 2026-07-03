@@ -14,6 +14,8 @@ GitHub Copilot 项目里，主指令入口优先看下面两个位置：
 | 项目级主指令 | `AGENTS.md` | 优先作为主入口；如果仓库明确采用它，就不要再把 `.github/copilot-instructions.md` 当第二主入口 |
 | 项目级主指令（旧入口） | `.github/copilot-instructions.md` | 只在仓库明确采用它时使用；如果与 `AGENTS.md` 同时存在且都写实质内容，标为待整理 |
 
+如果仓库同时存在 `AGENTS.md`、`CLAUDE.md` 和 `.github/copilot-instructions.md`，先读本仓库 / 工作区规则判断权威入口。软链、一行 include、`@AGENTS.md` 这类转发入口不算内容分叉；两份以上独立文件都承载实质规则且没有明确同源关系时，标为待整理，不要擅自合并。
+
 ## 范围化指令与工作流资产
 
 | 类型 | 路径 |
@@ -58,7 +60,7 @@ GitHub Copilot 相关用户级 assets 常见于：
 
 在 GitHub Copilot 仓库里执行 `cleanup` 时，推荐按下面顺序盘点：
 
-1. 先确认项目级主指令到底是 `AGENTS.md` 还是 `.github/copilot-instructions.md`
+1. 先确认项目级主指令到底是 `AGENTS.md`、`CLAUDE.md` 还是 `.github/copilot-instructions.md`，以及是否存在明确同源 / 转发关系
 2. 再检查 `.github/instructions/` 是否有范围化规则已经过期
 3. 再检查 `.github/agents/`、`.github/prompts/`、项目级 `skills/` 是否和当前事实一致
 4. 再检查仓库内 README、docs、CHANGELOG 等长期知识文档
@@ -67,7 +69,7 @@ GitHub Copilot 相关用户级 assets 常见于：
 
 ## 默认不要做的事
 
-- 不要把 `AGENTS.md` 和 `.github/copilot-instructions.md` 同时当成双主入口长期保留
+- 不要把 `AGENTS.md`、`CLAUDE.md` 和 `.github/copilot-instructions.md` 同时当成多个双主入口长期保留
 - 不要默认扫描整个用户目录
 - 不要把用户级长期知识当成仓库级 cleanup 的默认目标
 - 不要为了“显得完整”就把所有 prompts、hooks、instructions 全部抄进长期知识摘要

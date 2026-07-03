@@ -2,6 +2,14 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.6.1] - 2026-07-03
+
+### Changed
+
+- Extended the published `cleanup` skill with conservative repository-rule governance auditing, including safe auto-fix vs. user-decision boundaries.
+- Added a GitHub Copilot-specific cleanup governance reference and updated cleanup reference matrices for instruction entrypoints, published asset lists, dead references, and metadata consistency.
+- Bumped the published plugin version metadata to `5.6.1`.
+
 ## [5.6.0] - 2026-05-18
 
 ### Added

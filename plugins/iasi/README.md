@@ -1,6 +1,6 @@
 # iasi
 
-`iasi` 是当前 marketplace 里的 GitHub Copilot 插件，聚焦高标准只读分析、设计优先规划、高保真交接与终态长期知识沉淀。
+`iasi` 是当前 marketplace 里的 GitHub Copilot 插件，聚焦高标准只读分析、设计优先规划、高保真交接、终态长期知识沉淀与规则审计。
 
 它包含以下可复用资产：
 
@@ -14,7 +14,7 @@
 - `copilot-thought-logging` workspace-wide instruction
 - `hooks/hooks.json` 空 hooks 占位文件
 
-`ask-pro-max` 用于高标准、只读的问题分析；`plan-pro-max` 用于先收敛设计、比较方案、获得明确批准后再输出实施计划；`brainstorming` 用于先澄清需求并落设计文档；`writing-plans` 用于把设计文档转成可执行计划；`handoff` 用于为新 chat 生成基于证据的交接上下文；`cleanup` 用于在任务终态对仓库内长期知识做深度沉淀与整理。
+`ask-pro-max` 用于高标准、只读的问题分析；`plan-pro-max` 用于先收敛设计、比较方案、获得明确批准后再输出实施计划；`brainstorming` 用于先澄清需求并落设计文档；`writing-plans` 用于把设计文档转成可执行计划；`handoff` 用于为新 chat 生成基于证据的交接上下文；`cleanup` 用于在任务终态对仓库内长期知识做深度沉淀、整理，并按需审计仓库规则是否被实践遵守。
 
 ## 插件结构
 ```text
