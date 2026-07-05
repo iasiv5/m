@@ -48,5 +48,21 @@
       "merge unrelated validation commands into a single plan",
       "skip the STOP condition for independent subsystems"
     ]
+  },
+  {
+    "id": "missing-design-path-stop",
+    "prompt": "批准的设计文档应该在 docs/specs/cache-plan.md，但我不确定这个文件是否存在。先帮我写实施计划。",
+    "expected": "先读取最小必要上下文并检查设计文档是否存在；如果路径不存在或读完后仍无法确定关键文件范围/验证方式，触发 STOP；说明缺口，不猜路径、不猜命令，不产出完整计划。",
+    "assertions": [
+      "response checks or asks to verify docs/specs/cache-plan.md before treating it as usable design input",
+      "response stops if the design file is missing or insufficient",
+      "response states the missing information needed to proceed",
+      "response does not invent affected files, commands, or validation paths"
+    ],
+    "must_not": [
+      "write a full implementation plan without reading or verifying the design input",
+      "guess repository paths or test commands",
+      "treat uncertain design input as approved and sufficient"
+    ]
   }
 ]
