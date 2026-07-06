@@ -2,6 +2,19 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.6.2] - 2026-07-06
+
+### Added
+
+- Synced five upstream mattpocock skills into `skills/`: `grilling`, `codebase-design`, `domain-modeling`, `grill-with-docs`, and `improve-codebase-architecture`.
+- Added `skills/.your-skill-collection.json` and `skills/update.sh` to keep upstream skill sync reproducible.
+- Added benchmark assets for local planning skills: `test-prompts.json` and `results.tsv` under `brainstorming` and `writing-plans`.
+
+### Changed
+
+- Updated `brainstorming` and `writing-plans` skill prompts/rules to improve mixed-intent routing, design-path coverage, and self-review constraints.
+- Refreshed plugin and marketplace documentation to match the current published asset inventory.
+
 ## [5.6.1] - 2026-07-03
 
 ### Changed
