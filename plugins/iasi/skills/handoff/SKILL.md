@@ -1,12 +1,12 @@
 ---
 name: handoff
-description: "为新的 GitHub Copilot chat 生成面向下一会话目标的 handoff / continuation context。仅在用户明确要把当前工作交接到新 chat 继续时触发；不要用于普通总结、状态同步、代码评审、changelog 或文章摘要。基于只读证据输出可直接粘贴到新 chat 的中文优先接续上下文。"
+description: "为新的 chat / 新会话生成面向下一会话目标的 handoff / continuation context。仅在用户明确要把当前工作交接到新 chat 继续时触发；不要用于普通总结、状态同步、代码评审、changelog 或文章摘要。基于只读证据输出可直接粘贴到新 chat 的中文优先接续上下文。"
 argument-hint: 请说明要交接到新建会话的目标、要求或关注点；可留空
 ---
 
 # Handoff Skill
 
-这个 skill 用于为新的 GitHub Copilot chat 生成自包含、基于证据、上下文损失尽可能小的交接摘要。
+这个 skill 用于为新的 chat / 新会话生成自包含、基于证据、上下文损失尽可能小的交接摘要。产出的交接块可直接粘贴到下一个 chat，在 GitHub Copilot Chat、Claude Code、Cursor 等 agent runtime 中通用。
 
 固定骨架标题和续接说明默认中英双语；正文、空值占位和动作说明默认中文优先，除非用户明确要求纯英文或双语正文。
 
