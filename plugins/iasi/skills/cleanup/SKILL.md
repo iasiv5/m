@@ -157,12 +157,12 @@ argument-hint: 请说明要沉淀的任务、范围或收尾目标；可留空
 - 仓库记忆（如果当前环境支持）
 - 当前任务明确触及的文件和变更事实
 
-如果暂时拿不准 GitHub Copilot 仓库里哪些路径属于长期知识载体，先读取 [references/agent-paths.md](references/agent-paths.md) 再决定扫描面。
+如果暂时拿不准当前 runtime 仓库里哪些路径属于长期知识载体，先读取 [references/agent-paths.md](references/agent-paths.md) 再决定扫描面。
 不要为了“显得完整”而扫描整个仓库。
 
 ### PHASE 1B: 规范执行审计（按需）
 
-当用户明确要求规范审计，或本次 cleanup 涉及仓库规则、Copilot customization、插件发布面、README / CHANGELOG / metadata 等长期资产时，执行这一段。
+当用户明确要求规范审计，或本次 cleanup 涉及仓库规则、agent runtime 定制（custom instructions / rules / skills 等任何 runtime 的指令面）、插件发布面、README / CHANGELOG / metadata 等长期资产时，执行这一段。
 
 先读取 [references/governance.md](references/governance.md)，再按下面顺序做：
 1. 读取当前仓库和必要直接上级的规则入口，确认哪个文件是权威来源
@@ -195,7 +195,7 @@ argument-hint: 请说明要沉淀的任务、范围或收尾目标；可留空
 2. 合并已有条目，避免并排堆积同义内容
 3. 只补真正缺失且已稳定的长期信息
 
-如果这次 cleanup 涉及 GitHub Copilot skill、agent、prompt、instruction、README、metadata 或 CHANGELOG，同步面优先按 [references/sync-matrix.md](references/sync-matrix.md) 检查，不要只改单一入口。
+如果这次 cleanup 涉及 skill、agent、prompt、instruction、README、metadata 或 CHANGELOG（任何 agent runtime 的资产），同步面优先按 [references/sync-matrix.md](references/sync-matrix.md) 检查，不要只改单一入口。
 
 编辑原则：
 - 删旧优于追加
