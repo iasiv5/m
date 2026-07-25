@@ -26,3 +26,7 @@ skill "反例段"的挑选标准：用已知失败案例（`test-prompts.json`�
 ## 中模型校准 (mid-model calibration)
 
 按 mid-tier 模型（非 Opus 级）校准 skill 的默认基准：保留**压缩锚词**（高密度、结尾重新 prime）、删**散文式复述**（低密度、膨胀注意力）、强化 completion criteria 与 leading word。中模型跨长文档携带弱、情境 → 规则检索不可靠，因此要的是压缩而非重复。
+
+## 检索难度轴 (retrieval-difficulty axis)
+
+salvage 一条 skill 规则时的判据：按"中模型在情境里能否检索到它"分两类。**微妙情境守卫**（如 silent drift、跨轮矛盾）——情境需先被识别再检索，中模型易漏，须 co-locate 到触发点 PHASE + leading-word 锚，并以测试用例验证；测不过则前台化为"信号 → 动作"。**泛化结构规则**（如多子系统拆分、可视化降级）——情境里易检索，直接 defer 到正面规则 single source 即可，重复才是病。本轴调和 `test-mapped failure mode`（保留信号）与 `中模型校准`（压缩非重复）的张力：要不要前台化重复一条规则，由检索难度决定。
