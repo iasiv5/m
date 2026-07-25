@@ -59,12 +59,20 @@ argument-hint: 描述要做的功能、约束、背景或已有想法；可留�
 
 ## 红灯与反例
 
-命中下列已知翻车点时按“信号 → 动作”处理，不要继续硬走流程：
+命中下列已知翻车点时按“信号 → 一线动作”处理。本表是**诊断索引**——每条只写一线动作并指向详细规则归属，不在此重复正文：
 
-- **mixed intent（实现 + 设计混合）** → 不编码、不写补丁，只问一个路由选择题：`A. 这轮只做设计` / `B. 停止 brainstorming，直接进入实现或调试`
-- **直接写文档但方案尚未确认** → 先给推荐方案和 trade-offs 并触发 CHECKPOINT A；若用户只要草稿，文档标题显式标注“草稿 / 待审批”，不进入 `writing-plans`
+| 信号 | 一线动作 | 详见 |
+|---|---|---|
+| 请求本质不是设计（bugfix / review / 已有设计只要拆计划） | 🛑 STOP，路由到实现 / review / `writing-plans` | “不要路由”、🛑 STOP |
+| mixed intent（实现 + 设计混合） | 不编码、不写补丁，只问路由选择题：A 只做设计 / B 停 brainstorming 进实现 | — |
+| 直接写文档但方案尚未确认 | 先给推荐方案 + trade-offs，触发 CHECKPOINT A；草稿标“草稿 / 待审批” | CHECKPOINT A |
+| 跨多个独立子系统 | 先拆分，只继续第一个子项目 | PHASE 0、硬约束 |
+| 相关上下文找不到 / 无现成实现 | 列 1-3 条工作假设，按最保守假设写边界级设计，风险进未决事项 | PHASE 1 |
+| 含糊话术当 CHECKPOINT 批准 | 不推进，要求 `接受：...` / `批准：<path>` 令牌 | 🔴 CHECKPOINTS |
+| 可视化工具不可用 | 降级 Mermaid / ASCII / 文字结构，不伪造已验证视觉方案 | 硬约束 |
+| 跨轮矛盾 / 拒绝澄清 / 无声漂移 | 就地守卫已 co-locate 在执行点，见对应 PHASE | PHASE 2、PHASE 5 |
 
-其余（设计未批准就写代码 / 含糊话术当 CHECKPOINT 批准 / 跨多子系统包装成一份巨设计 / 为“更干净”重做边界 / 路由 `writing-plans` 时重新澄清 / scope creep via doc / handoff payload 留字面量 `<path>` 等）已在硬约束、各 PHASE、🔴 CHECKPOINTS 与 `references/spec-self-review.md` 正面规定，此处不重复。
+其余（为“更干净”重做边界 / scope creep via doc / handoff payload 留字面量 `<path>` 等）已在硬约束与 `references/spec-self-review.md` 规定，此处不重复。
 
 ## PHASE 0: 验证请求
 
@@ -124,7 +132,7 @@ argument-hint: 描述要做的功能、约束、背景或已有想法；可留�
 
 方案比较时同时检查设计单元是否足够清楚：每个单元都应该能回答“它负责什么、怎么使用、依赖什么”。如果必须读内部实现才能理解一个单元的用途，或改内部实现会牵动消费者，边界还没有设计好。
 
-默认形态：
+默认形态（每个方案写 4 项：核心思路 / 优点 / 缺点 / 适用条件）：
 
 > 方案 A：……
 > 方案 B：……
