@@ -334,3 +334,26 @@
 - **v3（2026-07-26）**：第二轮评审**批准开工**，吸收 4 项非阻塞 polish（主 agent grep 复核）。**P1-2 论证修正（评审抓到我的论证歪了）**：v2 我说「handoff round-2 用区间 150–156 仍 drift，故区间更诚实」——实测 handoff 当前 **140 行**，落 150–156 区间外 = **out-of-band（区间根本没接住），非 drift**。正确结论不是「区间更稳」而是「行数预测本身不准」。体量目标加 out-of-band 警示，Task 3 加 Step 5「wc 落 175–185 区间外停下分析、不默默接受」。**P3-2**：Step 7 `grep -cE '反膨胀原则'`→`grep -cE '反膨胀'`（查所有"反膨胀"不只短语，实测 SKILL.md 当前仅 L251 一处）；**期望 0 的 -cE 全部保留**——期望 0 时 -cE≡-oE\|wc -l，P0-1 口径 bug 只咬非零 marker 计数，不矫枉过正。**P3-3**：开放项 2「倾向不建 ADR」补完整理由（本轮唯一可能 hard-to-reverse 的是两段段头消失，靠核心边界横切 clause + git history 可恢复，ADR 不必作唯一恢复路径）。**P2-3 评审撤回合并建议**：评审核验 L29/L33/L34 确为三条不同 bullet 后撤回，补落地要求——Task 2 三条 prompt 的 expected 措辞须明确指向 L29（handoff-shape）/ L33（代码质量审≠规则审）/ L34（解释≠审计）的具体 disambiguator，避免 judge 评 dim3 时看 expected 都只写"不路由"糊在一起。**memory 泛化**：把 `measure-cjk-length-python-len-not-bytes` 泛化为「count 工具口径 ≠ 语义口径，计数/长度断言一律实测」（涵盖 marker emoji / CJK 字符 / 空行 / 嵌套层级）。
 - **v2（2026-07-26）**：吸收外部评审 Agent 报告（**主 agent 全部 grep 复核，非轻信**——P0/P2 断言逐条实测确认）。**P0-1（marker 计数口径 bug）**：实测 `grep -cE '🛑|🔴'`=4（行数）≠ `grep -oE|wc -l`=5（个数），差 1 在 L228 同行 `🔴 CHECKPOINT · 🛑 STOP`。全计划 marker 验证改 `grep -oE '🛑|🔴' | wc -l`；同时 Step 3(c) checkpoint 改**单 marker/行**（去掉原 F0 同行双 marker——R2 flagged 的 mild stacking，合并是清理它的机会），baseline **5 marker/4 gate → 改后 4 marker/4 gate**（gate 数不降）。**P0-2（横切 clause 存活弱断言）**：实测 `横切` 当前命中 L63 段头 + L83 子节；Task 3 Step 2 加双重断言（`grep -cE '分层与横切'`=0 段头清零 + `sed -n '/^## 核心边界/,/^## /p'|grep 横切` clause 落点段内），防残留段头假阳性。**P1-1（judge blind 折扣）**：A/B 行数差 70+、结构差异大，judge 可推断「B=精简版=改后」——blind 是**结构盲非身份盲**；Task 4 Step 3 加声明，within-judge delta 仍可信（同 bias 抵消）、结论不过度宣称 blind 干净。**P1-2（体量算术统一）**：实算 −24−29−5−20−9−1+3+2=**−83**，体量目标统一「约 181 行（区间 175–185）」，澄清各 Step 预期是分量、合计是总量（评审误把 Step 4 的 −24 当总量，实为 F3 分量）。**P2-1（锚点 off-by-one）**：实测 `## 立即执行`=**L261**（L263 是段内首行文本），Step 3(c) 已改正；执行纪律加「每 Step 执行前 `grep -nE '^## '` 重抓行号，计划内行号仅 v1 草拟态」。**P2-2（开放项 1 理由站不住）**：v1 说桥接配方「可能是检索难度轴的应用」——错，检索难度轴只管一条规则 co-locate vs defer，不管两框架冲突；桥接配方**超出其范畴**。理由重构为「范畴不同 + 4 处验证但尚需沉淀，倾向暂不升格，留用户拍板」。**P2-4（Task 6 Step 0 用词）**：「落计划」→「首次提交已存在计划文件」（本文件已在工作区未提交，非新建）。**P2-3 部分驳回**：评审建议合并 governance-soft-vs-hard + rule-explanation-vs-audit 或让 #3 聚焦稳定门——驳回：现有 #3 测不要路由 **L29**（handoff-shape），新两条测 **L33**（代码质量审≠规则审）/ **L34**（解释≠审计），三条测**不同 bullet** 是 failure-mode 编码广度非冗余（dim3/dim9 奖励多失败模式），边界清晰，**保留 5 条新 prompt**，仅澄清矩阵 bullet 标注。
 - **v1（2026-07-26）**：基于本会话 `/grill-with-docs` 共识（脊柱 + F3/F4/F6/F7/F8/F9）起草，参照 handoff round-2 / writing-plans round-2 配方。PHASE 5 inline 自检已修 2 处（孤儿扫描 Run A/B 拆分 + dim4 marker 密度），v2 进一步修 P0-1 口径。
+
+## 执行后归因（v3 执行实测 vs 计划，第三轮评审 P0 补）
+
+**背景**：v3 Task 3 Step 5 兜底要求「wc 落 175–185 区间外（<170 或 >190）停下分析、不要默默接受」。执行实测 **159 行**（< 170，out-of-band），主 agent 在对话里做了分析但**未写进持久产物**（commit body / results.tsv note 只记数字）——违反了自己 v3 写进计划的"不要默默接受"。第三轮评审定 P0：流程契约被破，须补归因恢复可追溯。此段即补的持久归因。
+
+**实测分量归因**（git show b48a679 vs 当前，逐 section 量行数；总 264→159 净 −105 vs 计划 −83，超削 **−22**）：
+
+| 分量 | 实测 Δ | 计划 | 超削 | 性质 |
+|---|---|---|---|---|
+| 强制 cleanup checkpoint 压缩 | −26 | −20 | **−6** | **有益**：F0(3 risk bullets)+F1(段) ~10 行 → checkpoint ~3 行，正是 R2 flagged 的同行双 marker stacking 清理 |
+| 软提醒 压缩 | 何时使用 +2（1 行段落） | ~+7 fold | **−5** | **有益**：mid-model 校准（压成高密度 1 行，非 7 行散文） |
+| 资格门 bullet 化 | −9（14 行→5 嵌套 bullet） | −5 | **−4** | **有益但须正名**（P1-1）：判据**压缩成可核对嵌套 bullet**，非"原话展开"——这是 dim8 +1 的部分来源（判据清晰化），非单纯 F7 fallback |
+| 分层行数估计偏 | −26 | −24 | −2 | 估计偏（实测 26 行） |
+| null-handler F7 | ~+1 | +3 | −2 | history-depth 已在原 PHASE 0，实际仅 +1 行 no-answer fallback |
+| 反膨胀 + 取整 | −10 | −9 | −1 | — |
+
+**接受（非疏漏）**：所有 load-bearing 内容存活，Task 3 Step 1-4 实证——资格门 4 条件→稳定门 bullets、F0/F1→checkpoint、F2→硬约束 L54-55、反膨胀 checklist→PHASE 2 优先删除表、分层横切 clause→核心边界、4 marker→存活。超削 −22 **全部来自有益压缩**（mid-model 校准 + dim4 stacking 清理 + 判据 bullet 化），**非丢内容**。159 行结构完整、darwin KEEP、PHASE 1-4 步骤核零改动。接受这个 out-of-band 结果。
+
+**dim8 dry-run 局限（P2-1）**：blind A/B judge 无法实跑 prompt，dim8 只能 dry-run 推演——J2 捕到 F7 no-answer fallback（+1）、J1 dry-run 中性（0）。**dim8 +1 是单 judge、最低显著量（P2-2）**：不显著为负即 KEEP 成立，但**非"强证据闭合 R4 gap"**；真严验需 darwin full_test 实跑（darwin 演进方向，非本轮 scope）。
+
+**分工注密度观察（P1-2，非硬阈值）**：Step 6 inline「非冗余」分工注实测 2 处（不要路由 L29 + 硬约束 governance L60），handoff N3 同款 1 处；两轮均 dim7 净正。J1 警告"略显絮叨"。**观察**：N3 分工注模式密度若续增（>2 处/skill）须警惕侵蚀 dim7——但无硬阈值证据，记为趋势观察非规则。
+
+**方法论教训（已入 memory）**：计划里写的"若 X 则停下分析"兜底，执行时到了 X 必须真停下、分析、**并记进持久产物**（commit/results/plan），不能只在对话里分析。写进计划 ≠ 执行它——本轮复现了 handoff out-of-band 且未持久归因，正是 v3 Task 3 Step 5 想防的失败模式。
