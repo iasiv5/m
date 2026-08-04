@@ -2,6 +2,17 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.7.0] - 2026-08-04
+
+### Changed
+
+- Replaced the `/ask-pro-max` command prompt with `/goal-driven`, a pure assembler that turns a user-supplied goal and verifiable criteria into a deployable Goal-Driven master/subagent prompt (verifiability gate included; the assembler itself does not run the loop).
+- Bumped the published plugin version metadata to `5.7.0` in both the plugin manifest and marketplace entry.
+
+### Removed
+
+- Removed the `/ask-pro-max` command prompt. The `Ask Pro Max` custom agent is unchanged and remains available in the agent mode selector.
+
 ## [5.6.2] - 2026-07-06
 
 ### Added
