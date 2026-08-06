@@ -2,6 +2,14 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.7.1] - 2026-08-06
+
+### Changed
+
+- Reworked the `grilling` skill from a one-question-at-a-time interview into a design-tree, round-based interrogation model. Each round now asks the full **frontier** — every decision whose prerequisites are already settled — as a numbered set of questions, each with a recommended answer; after the user's answers the frontier is recomputed so questions that depend on still-open decisions roll to a later round. Environment facts are looked up by dispatched sub-agents, so an in-flight lookup only blocks its own downstream questions rather than the rest of the frontier. The session ends when the frontier is empty. ([38befd6](https://github.com/iasiv5/m/commit/38befd64c1eda64570f4c4ccd8e35373ce5c979f))
+- Synced the `Grilling` agent's short description to "Stress-test thinking a round of questions at a time" to match the new round-based model.
+- Bumped the published plugin version metadata to `5.7.1` in both the plugin manifest and marketplace entry.
+
 ## [5.7.0] - 2026-08-04
 
 ### Changed
