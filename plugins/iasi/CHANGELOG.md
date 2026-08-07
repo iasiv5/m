@@ -2,6 +2,13 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.7.2] - 2026-08-07
+
+### Changed
+
+- Genericized sub-agent spawning guidance in the `codebase-design` and `improve-codebase-architecture` skills. Replaced tool-specific references to "the Agent tool" and `subagent_type=Explore` with runtime-agnostic "spawn a sub-agent" phrasing, so the skills read identically across agent runtimes rather than being tied to one tool's API.
+- Bumped the published plugin version metadata to `5.7.2` in both the plugin manifest and marketplace entry.
+
 ## [5.7.1] - 2026-08-06
 
 ### Changed
