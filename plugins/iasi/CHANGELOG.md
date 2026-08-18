@@ -2,6 +2,15 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.7.3] - 2026-08-18
+
+### Changed
+
+- De-slash-commanded cross-skill invocations in the `grill-with-docs` and `improve-codebase-architecture` skills. Replaced phrasing like "run the `/grilling` skill" with "call the Skill tool with \"grilling\"", so skill-to-skill references no longer read as user-facing slash commands.
+- Rewrote the `domain-modeling` skill's description to trigger on concrete artifacts — discussing codebase terminology, writing or editing `CONTEXT.md`, or recording or editing an ADR — instead of the vaguer "ubiquitous language" phrasing.
+- Normalized punctuation in the `grilling` skill body, replacing em-dash clauses with colons and semicolons.
+- Bumped the published plugin version metadata to `5.7.3` in both the plugin manifest and marketplace entry.
+
 ## [5.7.2] - 2026-08-07
 
 ### Changed
