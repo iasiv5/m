@@ -2,6 +2,14 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.7.4] - 2026-08-24
+
+### Changed
+
+- Normalized punctuation across the `codebase-design`, `domain-modeling`, and `improve-codebase-architecture` skills (including their sub-documents `DEEPENING.md`, `DESIGN-IT-TWICE.md`, `ADR-FORMAT.md`, `CONTEXT-FORMAT.md`, and `HTML-REPORT.md`): replaced em-dash clauses with colons, semicolons, or commas.
+- Expanded the `grilling` skill's round-format template to show multiple questions per round, each with its recommended answer separated by a horizontal rule.
+- Bumped the published plugin version metadata to `5.7.4` in both the plugin manifest and marketplace entry.
+
 ## [5.7.3] - 2026-08-18
 
 ### Changed
