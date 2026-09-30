@@ -1,8 +1,8 @@
-# Context
+# Glossary
 
 本仓库（workspace `m`）的领域模型与术语。决策记录见 `docs/adr/`。
 
-> 单插件阶段，根级 CONTEXT.md 即可。若 marketplace 长出多个插件、各自有独立决策，改用 `CONTEXT-MAP.md` 指向各插件子 context。
+> 单插件阶段，根级 GLOSSARY.md 即可。若 marketplace 长出多个插件、各自有独立决策，改用 `GLOSSARY-MAP.md` 指向各插件子 context。
 
 ## 设计轨道 (design track)
 
@@ -13,7 +13,7 @@
 
 ## 单向 pull handoff
 
-下游 skill 靠**识别上游产物**来承接上游，而非依赖上游推送 payload。用于上游冻结、不可本地加出口指针的场景。对照：brainstorming → writing-plans 是协同（有现成 payload）；grill-with-docs → writing-plans 是单向 pull（靠 writing-plans 自己识别 ADR / CONTEXT）。
+下游 skill 靠**识别上游产物**来承接上游，而非依赖上游推送 payload。用于上游冻结、不可本地加出口指针的场景。对照：brainstorming → writing-plans 是协同（有现成 payload）；grill-with-docs → writing-plans 是单向 pull（靠 writing-plans 自己识别 ADR / GLOSSARY）。
 
 ## reviewer gate
 
