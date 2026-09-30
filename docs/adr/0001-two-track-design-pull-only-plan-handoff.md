@@ -36,5 +36,5 @@ writing-plans 是实施计划入口。上游有两条把"模糊想法"收敛成�
 
 ## 关联
 
-- 同源 glossary 见 `m/CONTEXT.md`：设计轨道、单向 pull handoff、reviewer gate、test-mapped failure mode、中模型校准。
+- 同源 glossary 见 `m/GLOSSARY.md`：设计轨道、单向 pull handoff、reviewer gate、test-mapped failure mode、中模型校准。
 - 触发本次决策的会话：`/grill-with-docs` 审问 writing-plans 两步重构计划（2026-07-25）。
