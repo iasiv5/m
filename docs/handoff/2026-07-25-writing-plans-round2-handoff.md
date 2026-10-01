@@ -43,8 +43,8 @@
 
 2. 对齐（grill-with-docs）
    用 /grill-with-docs（= grilling + domain-modeling）和用户一问一答对齐：
-   每个 finding 给"我的推荐答案"，用户拍板。维护 m/CONTEXT.md 术语 + m/docs/adr/ ADR。
-   ⚠️ 维护 CONTEXT.md / ADR 用 domain-modeling 规则：术语即写即更，ADR 仅当 hard-to-reverse+surprising+real-tradeoff 三全才建。
+   每个 finding 给"我的推荐答案"，用户拍板。维护 m/GLOSSARY.md 术语 + m/docs/adr/ ADR。
+   ⚠️ 维护 GLOSSARY.md / ADR 用 domain-modeling 规则：术语即写即更，ADR 仅当 hard-to-reverse+surprising+real-tradeoff 三全才建。
 
 3. 计划（writing-plans skill 方法论）
    把对齐后的设计写成实施计划，落到 docs/plans/<date>-<feature>-implementation-plan.md。
@@ -80,7 +80,7 @@
 
 6. **中模型校准**（memory: calibrate-skills-to-mid-model）：用户跑 mid-tier 模型。skill 要的是**压缩锚词**（高密度）不是散文复述（膨胀注意力）。强化 completion criteria + leading word。
 
-7. **检索难度轴**（CONTEXT.md 术语，brainstorming 这轮结晶）：salvage 规则按"中模型情境里能否检索到"分两类——**微妙情境守卫**（silent-drift 类，情境需先识别再检索）须 co-locate 到触发点 PHASE + leading-word 锚 + 配测试用例；**泛化结构规则**直接 defer 到正面 single source。前台化 vs 去重，由检索难度决定。
+7. **检索难度轴**（GLOSSARY.md 术语，brainstorming 这轮结晶）：salvage 规则按"中模型情境里能否检索到"分两类——**微妙情境守卫**（silent-drift 类，情境需先识别再检索）须 co-locate 到触发点 PHASE + leading-word 锚 + 配测试用例；**泛化结构规则**直接 defer 到正面 single source。前台化 vs 去重，由检索难度决定。
 
 8. **分支策略**：每个 skill 优化开 feature 分支（如 `writing-plans-round2`），`--no-ff` merge main 保留评审脉络。main 上既有约定是直推 main（e76bbdb 等），但本地自主大规模重构倾向先分支。
 
@@ -105,12 +105,12 @@
 | darwin 评分器 | `~/.claude/skills/darwin-skill/SKILL.md` |
 | grill 工具链 | `~/.claude/skills/grill-with-docs/`（= grilling + domain-modeling） |
 | 参照成品 | `plugins/iasi/skills/brainstorming/SKILL.md`（246 行，已优化+桥接的样板） |
-| 领域术语 | `CONTEXT.md` |
+| 领域术语 | `GLOSSARY.md` |
 | 架构决策 | `docs/adr/0001-two-track-design-pull-only-plan-handoff.md` |
 | brainstorming 计划样板 | `docs/plans/2026-07-25-brainstorming-structural-dedup-implementation-plan.md` |
 | 本 handoff | `docs/handoff/2026-07-25-writing-plans-round2-handoff.md` |
 
-## 领域词汇表（CONTEXT.md 现有术语，复用不要重造）
+## 领域词汇表（GLOSSARY.md 现有术语，复用不要重造）
 
 设计轨道 (design track) · 单向 pull handoff · reviewer gate · test-mapped failure mode · 中模型校准 · 检索难度轴。
 

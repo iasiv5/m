@@ -75,8 +75,8 @@ memory（`darwin-iasi-plugin-copilot-lock`）警告 iasi-plugin skill 会**复�
 
 2. 对齐（grill-with-docs）
    用 /grill-with-docs（= grilling + domain-modeling）和用户一问一答对齐：
-   每个 finding 给"我的推荐答案"，用户拍板。维护 m/CONTEXT.md 术语 + m/docs/adr/ ADR。
-   ⚠️ 维护 CONTEXT.md / ADR 用 domain-modeling 规则：术语即写即更，ADR 仅当 hard-to-reverse+surprising+real-tradeoff 三全才建。
+   每个 finding 给"我的推荐答案"，用户拍板。维护 m/GLOSSARY.md 术语 + m/docs/adr/ ADR。
+   ⚠️ 维护 GLOSSARY.md / ADR 用 domain-modeling 规则：术语即写即更，ADR 仅当 hard-to-reverse+surprising+real-tradeoff 三全才建。
 
 3. 计划（writing-plans skill 方法论）
    把对齐后的设计写成实施计划，落到 docs/plans/<date>-cleanup-...-implementation-plan.md。
@@ -121,7 +121,7 @@ memory（`darwin-iasi-plugin-copilot-lock`）警告 iasi-plugin skill 会**复�
 
 9. **中模型校准**（memory: calibrate-skills-to-mid-model）：用户跑 mid-tier 模型。skill 要的是**压缩锚词**（高密度）不是散文复述（膨胀注意力）。强化 completion criteria + leading word。
 
-10. **检索难度轴**（CONTEXT.md 术语，brainstorming/writing-plans/handoff 结晶）：salvage 一条规则按"中模型情境里能否检索到"分两类——**微妙情境守卫**（silent drift、跨轮矛盾）须 co-locate 到触发点 PHASE + leading-word 锚 + 配测试；**泛化结构规则**直接 defer 到正面 single source。前台化 vs 去重，由检索难度决定。handoff round-2 的 materiality 拆分（L136 半指针半守卫）正是用这条：泛化规则 defer 回主定义、微妙守卫 inline 留触发点。
+10. **检索难度轴**（GLOSSARY.md 术语，brainstorming/writing-plans/handoff 结晶）：salvage 一条规则按"中模型情境里能否检索到"分两类——**微妙情境守卫**（silent drift、跨轮矛盾）须 co-locate 到触发点 PHASE + leading-word 锚 + 配测试；**泛化结构规则**直接 defer 到正面 single source。前台化 vs 去重，由检索难度决定。handoff round-2 的 materiality 拆分（L136 半指针半守卫）正是用这条：泛化规则 defer 回主定义、微妙守卫 inline 留触发点。
 
 11. **框架冲突已知名**：darwin dim3（失败模式编码）/dim9（反例黑名单）/dim5（模板具象）**奖励"有显式失败表+黑名单+脚手架"**；writing-great-skills 把这些判为 duplication/negation/sprawl 要删。两框架意见相反。**桥接解法**：诊断索引表（信号→一线动作→详见指针，不重述正文）+ 保留 co-located 守卫作真正处理器。handoff round-2 的 N3 分工说明（入口锚总纲 vs L112 解码型 silent-drift 守卫）成功守住 dim9——删 negation 时给保留的那条加"为什么不是冗余"的分工注，防 darwin dim7 误扣。
 
@@ -152,12 +152,12 @@ memory（`darwin-iasi-plugin-copilot-lock`）警告 iasi-plugin skill 会**复�
 | darwin 评分器 | `~/.claude/skills/darwin-skill/SKILL.md` |
 | grill 工具链 | `~/.claude/skills/grill-with-docs/`（= grilling + domain-modeling） |
 | 参照成品（最新） | `plugins/iasi/skills/handoff/SKILL.md`（140 行，round-2 半指针半守卫 + N3 分工样板）+ `plugins/iasi/skills/writing-plans/SKILL.md`（220 行，MERGE-before-DELETE + 红灯索引表样板）+ `plugins/iasi/skills/brainstorming/SKILL.md`（246 行，桥接样板） |
-| 领域术语 | `CONTEXT.md`（设计轨道/单向 pull handoff/reviewer gate/test-mapped failure mode/中模型校准/检索难度轴） |
+| 领域术语 | `GLOSSARY.md`（设计轨道/单向 pull handoff/reviewer gate/test-mapped failure mode/中模型校准/检索难度轴） |
 | 架构决策 | `docs/adr/0001-two-track-design-pull-only-plan-handoff.md` |
 | 计划样板（最新） | `docs/plans/2026-07-25-handoff-round2-structural-dedup-implementation-plan.md`（经 3 轮评审，含 darwin judge prompt 模板、C2 tie-break、MERGE-before-DELETE、框架冲突判据表） |
 | 本 handoff | `docs/handoff/2026-07-26-cleanup-skill-optimization-handoff.md` |
 
-## 领域词汇表（CONTEXT.md 现有术语，复用不要重造）
+## 领域词汇表（GLOSSARY.md 现有术语，复用不要重造）
 
 设计轨道 (design track) · 单向 pull handoff · reviewer gate · test-mapped failure mode · 中模型校准 · 检索难度轴 (retrieval-difficulty axis)。
 

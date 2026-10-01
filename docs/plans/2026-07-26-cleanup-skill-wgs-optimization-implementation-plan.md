@@ -27,7 +27,7 @@
 - **反膨胀原则删除（F4）**：`反膨胀原则`(L251-259) 三重述——其 checklist(重复/过期/一次性叙事/错位) ≈ PHASE 2 优先删除表(中间态/一次性/已过期/低价值重复)；其原则 ≈ 硬约束 L52「不做流水账追加器」。DELETE 整段，single source = 硬约束 L52（leading principle）+ PHASE 2（keep/delete 表）。顺带消除讽刺性自指（cleanup 职责是让知识干净，SKILL 自己却最长）。
 - **null-handler 补全（F7，闭合 dim8 open gap）**：PHASE 0 裸 `/cleanup` handler(L151-156) R4 judge 标 dim8 cap 8 = 缺 history-depth spec + no-answer fallback。补：history-depth 限定（本次会话 + 仓库最近变更，把「最近」界明确）+ no-answer fallback（用户不答 → 只盘点列候选不写，确认范围再动笔）。
 - **negation 大部分保留（F8，框架冲突区）**：按检索难度轴，`不要路由`/硬约束 L57-61/PHASE 各 🛑 守卫都是 co-located 微妙守卫（silent-drift 高危，中模型默认会做错）→ KEEP。dup-negation（反触发/F2）已被脊柱/F6 删。intro L11 身份否定（它不是…也不是…）→ condense 成正面身份。关键守卫加「非冗余」分工注（handoff round-2 N3 同款）防 darwin dim7 误扣。
-- **不动**：description frontmatter（路由面敏感，触发短语 invocation source）、references 三件（agent-paths/governance/sync-matrix，runtime-INCLUSIVE 已 PASS 硬约束#13）、PHASE 1/1B/2/3/4 步骤核、CONTEXT.md / docs/adr（本轮决策不达 ADR 三全门槛——real-tradeoff✓ surprising✓ hard-to-reverse✗；检索难度轴/test-mapped failure mode 已存在并被复用）。
+- **不动**：description frontmatter（路由面敏感，触发短语 invocation source）、references 三件（agent-paths/governance/sync-matrix，runtime-INCLUSIVE 已 PASS 硬约束#13）、PHASE 1/1B/2/3/4 步骤核、GLOSSARY.md / docs/adr（本轮决策不达 ADR 三全门槛——real-tradeoff✓ surprising✓ hard-to-reverse✗；检索难度轴/test-mapped failure mode 已存在并被复用）。
 
 ## 全局约束
 
@@ -46,7 +46,7 @@
 - 目标 skill：`plugins/iasi/skills/cleanup/SKILL.md`（当前 264 行）+ `test-prompts.json`（当前 4 条）。
 - 形态参照：`plugins/iasi/skills/handoff/SKILL.md`（140 行，round-2 sibling 版式样板：何时使用+不要路由、无独立触发模型段）+ `plugins/iasi/skills/writing-plans/SKILL.md`（220 行）。
 - 诊断 rubric：`~/.claude/skills/writing-great-skills/SKILL.md` + `GLOSSARY.md`。
-- 术语/决策上下文：`CONTEXT.md`（检索难度轴、test-mapped failure mode、中模型校准）、`docs/adr/0001-two-track-design-pull-only-plan-handoff.md`。
+- 术语/决策上下文：`GLOSSARY.md`（检索难度轴、test-mapped failure mode、中模型校准）、`docs/adr/0001-two-track-design-pull-only-plan-handoff.md`。
 - handoff：`docs/handoff/2026-07-26-cleanup-skill-optimization-handoff.md`（13 硬约束）。
 - 计划样板：`docs/plans/2026-07-25-handoff-round2-structural-dedup-implementation-plan.md`（含 darwin judge prompt 模板、MERGE-before-DELETE、框架冲突判据表、C2 tie-break）。
 - darwin 历史：`plugins/iasi/skills/cleanup/results.tsv`（07-19 baseline 72.3 → R1-R4 后 78.5；**R3 dim7 counting fix + redundancy 未 collapse open gap**、**R4 dim8 null-handler open gap（cap 8 = 缺 history-depth + no-answer fallback）**——本轮 F3/F7 正面闭合这两个 gap）。
@@ -60,7 +60,7 @@
 - darwin 实测：≥2 独立 judge 盲评 A/B（Task 4，只读 + results.tsv 追加）
 - 视情况桥接（Task 5，条件触发）
 - 收口：feature 分支 commit + --no-ff merge（Task 6）
-- **不动**：`references/*.md`、description frontmatter、CONTEXT.md、docs/adr
+- **不动**：`references/*.md`、description frontmatter、GLOSSARY.md、docs/adr
 
 ## 任务清单
 
@@ -325,8 +325,8 @@
   - **dim4（F5/F6 marker 迁移）**：hold，须保 🛑/🔴 密度（R2 `ceea669` markers 原在资格门/F0/F1，迁到 PHASE 0 稳定门 + 强制 checkpoint）。Task 3 Step 2 grep 验。
   - **dim3/dim9（F8 negation 保留）**：hold，dup-negation（反触发/F2）删可能使 dim9 密度微降（Δ −1 ~ −2 可接受），靠不要路由 + 硬约束 L59 + PHASE 0 🛑 桥接；若 ≥2 judge 一致 ≤ −2 触发 Task 5。
 - **开放项（供外部评审一并拍板，非阻塞）**：
-  1. 「框架冲突桥接」（signal→action 索引 + co-located 守卫 + 分工注）是否升格为 CONTEXT.md 术语——**P2-2 修正理由**：它处理的是 darwin dim3/9 与 WGS 两个外部框架的冲突，**超出 CONTEXT.md「检索难度轴」范畴**（检索难度轴只管「一条规则 co-locate vs defer」的取舍，不管「两个评审框架打架怎么桥接」）。已在 brainstorming `5f54f04` / writing-plans round-2 / handoff round-2 N3 / 本轮 F8 共 4 处验证有效，但**是否升格为稳定术语还是临时手法留给你拍板**——倾向：暂不升格（避免过早抽象），但理由是「范畴不同 + 尚需更多沉淀」，**非** v1 说的「检索难度轴的应用」（那一句站不住，已改正）。
-  2. 是否为本轮框架冲突立场建 ADR——三全门槛 borderline（real-tradeoff✓ surprising✓ hard-to-reverse✗），倾向不建（**P3-3 补完整理由**：本轮唯一可能 hard-to-reverse 的是两段段头消失[分层与横切 / 反膨胀原则]，但靠核心边界横切 clause + git history 可恢复，ADR 不必作唯一恢复路径；且 handoff 硬约束#11 + CONTEXT.md 检索难度轴已记载同款立场）。
+  1. 「框架冲突桥接」（signal→action 索引 + co-located 守卫 + 分工注）是否升格为 GLOSSARY.md 术语——**P2-2 修正理由**：它处理的是 darwin dim3/9 与 WGS 两个外部框架的冲突，**超出 GLOSSARY.md「检索难度轴」范畴**（检索难度轴只管「一条规则 co-locate vs defer」的取舍，不管「两个评审框架打架怎么桥接」）。已在 brainstorming `5f54f04` / writing-plans round-2 / handoff round-2 N3 / 本轮 F8 共 4 处验证有效，但**是否升格为稳定术语还是临时手法留给你拍板**——倾向：暂不升格（避免过早抽象），但理由是「范畴不同 + 尚需更多沉淀」，**非** v1 说的「检索难度轴的应用」（那一句站不住，已改正）。
+  2. 是否为本轮框架冲突立场建 ADR——三全门槛 borderline（real-tradeoff✓ surprising✓ hard-to-reverse✗），倾向不建（**P3-3 补完整理由**：本轮唯一可能 hard-to-reverse 的是两段段头消失[分层与横切 / 反膨胀原则]，但靠核心边界横切 clause + git history 可恢复，ADR 不必作唯一恢复路径；且 handoff 硬约束#11 + GLOSSARY.md 检索难度轴已记载同款立场）。
 - 若批准，按 Task 1 → 2 → 3 → 4 →（5 条件）→ 6 顺序执行；darwin 结论会在 Task 4 回报。
 
 ## 修订记录

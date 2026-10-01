@@ -20,7 +20,7 @@
   - 并入后，独立 STOP 段的 5 条全部有家：4 条输入校验 STOP 在 PHASE 0（3 条既有 + L60 新并入），1 条 CHECKPOINT 在 PHASE 6。此时删除独立 STOP 段才是真正零行为丢失。
 - 红灯段从"信号→动作（动作完整重述）"两段式，升级为 brainstorming 桥接后的"信号→一线动作→详见"三段式**诊断索引表**：动作不重述，只指指针——同时解 dim3（两段式 gap）与 dim7（STOP overlap）。
 - 形态参照：`plugins/iasi/skills/brainstorming/SKILL.md` 的"红灯与反例"表（该表在 brainstorming 文件 L64-73 区）。
-- 不动：description（路由面敏感）、入口身份句（dedup 轮不碰身份锚）、test-prompts.json（F3 延后 round-3）、CONTEXT.md / docs/adr/（Q1 决策不达 ADR 三全门槛，无新术语）。
+- 不动：description（路由面敏感）、入口身份句（dedup 轮不碰身份锚）、test-prompts.json（F3 延后 round-3）、GLOSSARY.md / docs/adr/（Q1 决策不达 ADR 三全门槛，无新术语）。
 
 ## 全局约束
 
@@ -38,7 +38,7 @@
 - 目标 skill：`plugins/iasi/skills/writing-plans/SKILL.md`（当前 227 行）。
 - 形态参照：`plugins/iasi/skills/brainstorming/SKILL.md`（红灯段索引表）。
 - 诊断 rubric：`~/.claude/skills/writing-great-skills/SKILL.md` + `GLOSSARY.md`。
-- 术语/决策上下文：`CONTEXT.md`（检索难度轴、test-mapped failure mode、中模型校准）、`docs/adr/0001-two-track-design-pull-only-plan-handoff.md`。
+- 术语/决策上下文：`GLOSSARY.md`（检索难度轴、test-mapped failure mode、中模型校准）、`docs/adr/0001-two-track-design-pull-only-plan-handoff.md`。
 - handoff：`docs/handoff/2026-07-25-writing-plans-round2-handoff.md`（9 个硬约束）。
 
 ## 文件结构与职责

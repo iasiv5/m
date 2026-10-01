@@ -26,13 +26,13 @@
 - 已批准设计：本会话 `/grill-with-docs` 共识（Q1–Q10 决策），无独立 spec 文档。
 - 目标 skill：`plugins/iasi/skills/brainstorming/SKILL.md`（当前 303 行）。
 - 形态参照：`plugins/iasi/skills/writing-plans/SKILL.md`。
-- 术语/决策上下文：`CONTEXT.md`、`docs/adr/0001-two-track-design-pull-only-plan-handoff.md`。
+- 术语/决策上下文：`GLOSSARY.md`、`docs/adr/0001-two-track-design-pull-only-plan-handoff.md`。
 
 ## 文件结构与职责
 
 - Modify: `plugins/iasi/skills/brainstorming/SKILL.md` — 结构去重 + 守卫归位（Task 1）
 - Modify: `plugins/iasi/skills/brainstorming/test-prompts.json` — 新增 3 条微妙守卫测试用例（Task 2）
-- Modify: `CONTEXT.md` — 新增 `检索难度轴` glossary 条目（Task 3）
+- Modify: `GLOSSARY.md` — 新增 `检索难度轴` glossary 条目（Task 3）
 - 验证：跨 3 文件的零行为丢失自检（Task 4）
 - 收口：单条 commit（Task 5）
 
@@ -112,17 +112,17 @@
   - Run: `python3 -c "import json;d=json.load(open('plugins/iasi/skills/brainstorming/test-prompts.json'));print(len(d));assert all(set(['expected','assertions','must_not'])<=set(x) for x in d[-3:]);print('ok')"`
   - Expected: 13 条；新 3 条字段齐全；JSON 合法。
 
-### Task 3: CONTEXT.md 新增 `检索难度轴` glossary 条目
+### Task 3: GLOSSARY.md 新增 `检索难度轴` glossary 条目
 
 - 目标：把本轮结晶的判据写进领域模型，供后续 handoff / cleanup 轮复用。
-- 涉及文件：`CONTEXT.md`
+- 涉及文件：`GLOSSARY.md`
 - 接口契约
   - Consumes：`中模型校准`、`test-mapped failure mode` 两条既有术语
   - Produces：`检索难度轴` 条目
 - 验证范围：条目存在；纯术语（无实现细节）；引用了上述两条既有术语。
 
 - [ ] Step 1: 改动前检查
-  - Run: `grep -c '检索难度轴' CONTEXT.md`
+  - Run: `grep -c '检索难度轴' GLOSSARY.md`
   - Expected: 0（条目尚不存在）。
 - [ ] Step 2: 在 `## 中模型校准 (mid-model calibration)` 条目之后追加
   - Change: 追加：
@@ -132,7 +132,7 @@
     salvage 一条 skill 规则时的判据：按"中模型在情境里能否检索到它"分两类。**微妙情境守卫**（如 silent drift、跨轮矛盾）——情境需先被识别再检索，中模型易漏，须 co-locate 到触发点 PHASE + leading-word 锚，并以测试用例验证；测不过则前台化为"信号 → 动作"。**泛化结构规则**（如多子系统拆分、可视化降级）——情境里易检索，直接 defer 到正面规则 single source 即可，重复才是病。本轴调和 `test-mapped failure mode`（保留信号）与 `中模型校准`（压缩非重复）的张力：要不要前台化重复一条规则，由检索难度决定。
     ```
 - [ ] Step 3: 改动后验证（采纳 N4 + B2 修复）
-  - Run: `grep -c '检索难度轴' CONTEXT.md`（期望 ≥1）；再取新条目正文 `awk '/## 检索难度轴/{f=1;next} /^## /&&f{exit} f' CONTEXT.md`（flag-awk：跳过标题行、到下一 `## ` 或 EOF——旧版 range awk `/A/,/^## /` 会因标题行自身匹配 `^## ` 而只输出标题、正文丢失，已实测确认），在其输出内 `grep -o '中模型校准\|test-mapped failure mode' | wc -l`（期望 ≥2，两条术语都被新条目显式引用，避免措辞微调丢引用）。
+  - Run: `grep -c '检索难度轴' GLOSSARY.md`（期望 ≥1）；再取新条目正文 `awk '/## 检索难度轴/{f=1;next} /^## /&&f{exit} f' GLOSSARY.md`（flag-awk：跳过标题行、到下一 `## ` 或 EOF——旧版 range awk `/A/,/^## /` 会因标题行自身匹配 `^## ` 而只输出标题、正文丢失，已实测确认），在其输出内 `grep -o '中模型校准\|test-mapped failure mode' | wc -l`（期望 ≥2，两条术语都被新条目显式引用，避免措辞微调丢引用）。
   - Expected: 检索难度轴条目存在；新条目正文内同时引用中模型校准与 test-mapped failure mode。
 
 ### Task 4: 零行为丢失自检（含 silent-drift front-back 判定）
@@ -174,7 +174,7 @@
 - [ ] Step 0: 计划文档归属（采纳 N1）
   - Change: 本计划文档当前未跟踪。在执行开始前先单独提交：`git add docs/plans/2026-07-25-brainstorming-structural-dedup-implementation-plan.md && git commit -m "docs(plans): brainstorming 结构去重实施计划"`。计划先于改动落盘，便于追溯；Task 5 的工作提交只含 3 个工作文件。
 - [ ] Step 1: 暂存与提交
-  - Run: `git add plugins/iasi/skills/brainstorming/SKILL.md plugins/iasi/skills/brainstorming/test-prompts.json CONTEXT.md && git commit`
+  - Run: `git add plugins/iasi/skills/brainstorming/SKILL.md plugins/iasi/skills/brainstorming/test-prompts.json GLOSSARY.md && git commit`
   - Change: message 参照 writing-plans 风格，如 `brainstorming: 结构去重（红灯段合并 + 模板内联 + 守卫归位）`，正文记：删表格/模板/黑名单 → 单个红灯段、关键原则压一行、description 剪尾、同等明确合一、3 守卫 co-locate+测试、新增检索难度轴 glossary、silent-drift front-back 结论；footer `Co-Authored-By: Claude <noreply@anthropic.com>`。
   - Expected: commit 成功；`git status` clean。
 
@@ -191,7 +191,7 @@
 - `wc -l plugins/iasi/skills/brainstorming/SKILL.md` → 约 225–235 行。
 - `grep -nE '^## ' …/SKILL.md` → 无 `失败模式与回退` / `默认响应模板` / `反例黑名单`；有 `红灯与反例`。
 - `python3 -c "import json;json.load(open('plugins/iasi/skills/brainstorming/test-prompts.json'))"` → 合法，13 条。
-- `grep -c '检索难度轴' CONTEXT.md` → ≥1。
+- `grep -c '检索难度轴' GLOSSARY.md` → ≥1。
 - Task 4 的 4 项全 pass（含 silent-drift front-back 结论已记）。
 - `git log -1 --stat` → 单 commit，3 文件。
 
