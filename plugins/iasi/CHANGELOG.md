@@ -2,6 +2,17 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.7.5] - 2026-10-08
+
+### Changed
+
+- Renamed the domain terminology document convention from `CONTEXT.md` to `GLOSSARY.md` across multiple skills:
+  - `domain-modeling`: renamed reference document `CONTEXT-FORMAT.md` to `GLOSSARY-FORMAT.md`, updated skill prompt, description, and cross-references to use `GLOSSARY.md`.
+  - `codebase-design`: updated references in `DESIGN-IT-TWICE.md` from `CONTEXT.md` to `GLOSSARY.md`.
+  - `improve-codebase-architecture`: updated domain dictionary references and file citations to `GLOSSARY.md`.
+- Updated the `grilling` skill with upstream prompt improvements: clarified question phrasing so that answering "yes" accepts the recommended answer.
+- Bumped the published plugin version metadata to `5.7.5` in both the plugin manifest and marketplace entry.
+
 ## [5.7.4] - 2026-08-24
 
 ### Changed
