@@ -4,7 +4,11 @@
     "codebase-design":  {"repo": "mattpocock/skills",   "subdir": "skills/engineering/codebase-design"},
     "domain-modeling":  {"repo": "mattpocock/skills",   "subdir": "skills/engineering/domain-modeling"},
     "grill-with-docs":  {"repo": "mattpocock/skills",   "subdir": "skills/engineering/grill-with-docs"},
-    "improve-codebase-architecture":  {"repo": "mattpocock/skills",  "subdir": "skills/engineering/improve-codebase-architecture"}
+    "improve-codebase-architecture":  {"repo": "mattpocock/skills",  "subdir": "skills/engineering/improve-codebase-architecture"},
+    "brainstorming":    {"repo": "iasiv5/skills",       "subdir": "brainstorming"},
+    "writing-plans":    {"repo": "iasiv5/skills",       "subdir": "writing-plans"},
+    "cleanup":          {"repo": "iasiv5/skills",       "subdir": "cleanup"},
+    "handoff":          {"repo": "iasiv5/skills",       "subdir": "handoff"}
   },
-  "local": ["brainstorming", "writing-plans", "cleanup", "handoff"]
+  "local": []
 }
