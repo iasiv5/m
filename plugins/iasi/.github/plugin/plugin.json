@@ -1,16 +1,14 @@
 {
   "name": "iasi",
-  "description": "GitHub Copilot plugin with ask-pro-max, plan-pro-max, nine reusable skills, and one reusable command prompt",
-  "version": "5.7.5",
+  "description": "GitHub Copilot plugin with eleven reusable skills and one reusable command prompt",
+  "version": "5.8.0",
   "author": {
     "name": "iasiv5"
   },
   "license": "MIT",
   "keywords": [
     "copilot-plugin",
-    "ask-pro-max",
     "goal-driven",
-    "plan-pro-max",
     "brainstorming",
     "cleanup",
     "handoff",
@@ -20,10 +18,11 @@
     "domain-modeling",
     "grill-with-docs",
     "improve-codebase-architecture",
+    "retro",
+    "writing-for-agents",
     "prompt",
     "skill"
   ],
-  "agents": "./agents/",
   "commands": "./commands/",
   "skills": "./skills/",
   "hooks": "./hooks/hooks.json"

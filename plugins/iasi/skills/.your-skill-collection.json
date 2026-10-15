@@ -1,14 +1,16 @@
 {
   "skills": {
-    "grilling":         {"repo": "mattpocock/skills",   "subdir": "skills/productivity/grilling"},
-    "codebase-design":  {"repo": "mattpocock/skills",   "subdir": "skills/engineering/codebase-design"},
-    "domain-modeling":  {"repo": "mattpocock/skills",   "subdir": "skills/engineering/domain-modeling"},
-    "grill-with-docs":  {"repo": "mattpocock/skills",   "subdir": "skills/engineering/grill-with-docs"},
-    "improve-codebase-architecture":  {"repo": "mattpocock/skills",  "subdir": "skills/engineering/improve-codebase-architecture"},
-    "brainstorming":    {"repo": "iasiv5/skills",       "subdir": "brainstorming"},
-    "writing-plans":    {"repo": "iasiv5/skills",       "subdir": "writing-plans"},
-    "cleanup":          {"repo": "iasiv5/skills",       "subdir": "cleanup"},
-    "handoff":          {"repo": "iasiv5/skills",       "subdir": "handoff"}
+    "brainstorming":                 {"repo": "iasiv5/skills", "subdir": "brainstorming"},
+    "cleanup":                       {"repo": "iasiv5/skills", "subdir": "cleanup"},
+    "handoff":                       {"repo": "iasiv5/skills", "subdir": "handoff"},
+    "writing-plans":                 {"repo": "iasiv5/skills", "subdir": "writing-plans"},
+    "codebase-design":               {"repo": "mattpocock/skills", "subdir": "skills/engineering/codebase-design"},
+    "domain-modeling":               {"repo": "mattpocock/skills", "subdir": "skills/engineering/domain-modeling"},
+    "grill-with-docs":               {"repo": "mattpocock/skills", "subdir": "skills/engineering/grill-with-docs"},
+    "grilling":                      {"repo": "mattpocock/skills", "subdir": "skills/productivity/grilling"},
+    "improve-codebase-architecture": {"repo": "mattpocock/skills", "subdir": "skills/engineering/improve-codebase-architecture"},
+    "retro":                         {"repo": "mattpocock/skills", "subdir": "skills/engineering/retro"},
+    "writing-for-agents":            {"repo": "mattpocock/skills", "subdir": "skills/productivity/writing-for-agents"}
   },
   "local": []
 }

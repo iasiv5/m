@@ -58,7 +58,7 @@ MIT License · Copyright (c) 2026 数字生命卡兹克 (Digital Life Khazix)
 
 ---
 
-## grilling / codebase-design / domain-modeling / grill-with-docs / improve-codebase-architecture
+## 上游同步 skills（mattpocock/skills）
 
 致敬 mattpocock/skills 的同名 skill：
 
@@ -67,10 +67,12 @@ MIT License · Copyright (c) 2026 数字生命卡兹克 (Digital Life Khazix)
 - domain-modeling: https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling/
 - grill-with-docs: https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs/
 - improve-codebase-architecture: https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture/
+- retro: https://github.com/mattpocock/skills/tree/main/skills/engineering/retro/
+- writing-for-agents: https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-for-agents/
 
 MIT License · Copyright (c) 2026 Matt Pocock
 
-这五个 skill 由本目录的 `update.sh` 从 mattpocock/skills 上游原样同步（英文、标准 SKILL.md），保留上游格式、不做中文化适配——Claude Code 与 GitHub Copilot 均直接加载 `.claude/skills` 下标准 SKILL.md，英文原版两个 runtime 均可用。
+这七个 skills 由本目录的 `update.sh` 从 mattpocock/skills 上游原样同步（英文、标准 SKILL.md），保留上游格式、不做中文化适配——Claude Code 与 GitHub Copilot 均直接加载 `.claude/skills` 下标准 SKILL.md，英文原版两个 runtime 均可用。
 
 ---
 

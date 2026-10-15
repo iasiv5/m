@@ -2,6 +2,21 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.8.0] - 2026-10-15
+
+### Added
+
+- Synced two upstream skills from `mattpocock/skills`: `retro` and `writing-for-agents`.
+
+### Removed
+
+- Removed the `ask-pro-max` and `plan-pro-max` custom agent modes.
+
+### Changed
+
+- Updated plugin and marketplace documentation and metadata to reflect 11 skills and no custom agents.
+- Bumped the plugin version to `5.8.0` in both the plugin manifest and marketplace entry.
+
 ## [5.7.5] - 2026-10-08
 
 ### Changed

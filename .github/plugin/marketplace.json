@@ -12,8 +12,8 @@
     {
       "name": "iasi",
       "source": "iasi",
-      "description": "GitHub Copilot plugin with ask-pro-max, plan-pro-max, nine reusable skills, and one reusable command prompt",
-      "version": "5.7.5"
+      "description": "GitHub Copilot plugin with eleven reusable skills and one reusable command prompt",
+      "version": "5.8.0"
     }
   ]
 }
