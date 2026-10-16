@@ -1,16 +1,26 @@
 {
+  "levels": {
+    "1": "Level I Skill —— 允许 Agent 自动调用（SKILL.md 无 disable-model-invocation 或值为 false）",
+    "2": "Level II Skill —— 不允许 Agent 自动调用（SKILL.md 含 disable-model-invocation: true）"
+  },
+  "phases": {
+    "ipdd-1": "I.P.D.D 流程第一步：对齐意图",
+    "ipdd-2": "I.P.D.D 流程第二步：撰写实施计划",
+    "ipdd-3": "I.P.D.D 流程第三步：执行实施计划",
+    "misc":   "其它推荐技能",
+    "sub":    "自动被调用的子技能，一般无需手动执行"
+  },
   "skills": {
-    "brainstorming":                 {"repo": "iasiv5/skills", "subdir": "brainstorming"},
-    "cleanup":                       {"repo": "iasiv5/skills", "subdir": "cleanup"},
-    "handoff":                       {"repo": "iasiv5/skills", "subdir": "handoff"},
-    "writing-plans":                 {"repo": "iasiv5/skills", "subdir": "writing-plans"},
-    "codebase-design":               {"repo": "mattpocock/skills", "subdir": "skills/engineering/codebase-design"},
-    "domain-modeling":               {"repo": "mattpocock/skills", "subdir": "skills/engineering/domain-modeling"},
-    "grill-with-docs":               {"repo": "mattpocock/skills", "subdir": "skills/engineering/grill-with-docs"},
-    "grilling":                      {"repo": "mattpocock/skills", "subdir": "skills/productivity/grilling"},
-    "improve-codebase-architecture": {"repo": "mattpocock/skills", "subdir": "skills/engineering/improve-codebase-architecture"},
-    "retro":                         {"repo": "mattpocock/skills", "subdir": "skills/engineering/retro"},
-    "writing-for-agents":            {"repo": "mattpocock/skills", "subdir": "skills/productivity/writing-for-agents"}
+    "grill-with-docs":              {"level": 2, "phase": "ipdd-1", "repo": "mattpocock/skills", "subdir": "skills/engineering/grill-with-docs", "invokes": ["grilling", "domain-modeling"], "note": "对齐意图首选"},
+    "brainstorming":                {"level": 1, "phase": "ipdd-1", "repo": "iasiv5/skills",     "subdir": "brainstorming", "note": "设计获批后移交 writing-plans 接续（PHASE 8 流转，非自动调用）"},
+    "writing-plans":                {"level": 1, "phase": "ipdd-2", "repo": "iasiv5/skills",     "subdir": "writing-plans", "note": "设计未定时回退 brainstorming / grill-with-docs（PHASE 0 路由，非自动调用）"},
+    "handoff":                      {"level": 1, "phase": "ipdd-3", "repo": "iasiv5/skills",     "subdir": "handoff", "note": "会话过长时先用它准备交接文案，新开 Session 继续"},
+    "writing-for-agents":           {"level": 1, "phase": "misc",   "repo": "mattpocock/skills", "subdir": "skills/productivity/writing-for-agents"},
+    "improve-codebase-architecture":{"level": 2, "phase": "misc",   "repo": "mattpocock/skills", "subdir": "skills/engineering/improve-codebase-architecture", "invokes": ["codebase-design", "grilling", "domain-modeling"]},
+    "retro":                        {"level": 2, "phase": "misc",   "repo": "mattpocock/skills", "subdir": "skills/engineering/retro", "invokes": ["writing-for-agents"]},
+    "grilling":                     {"level": 1, "phase": "sub",    "repo": "mattpocock/skills", "subdir": "skills/productivity/grilling", "note": "被 grill-with-docs / improve-codebase-architecture 自动调用"},
+    "domain-modeling":              {"level": 1, "phase": "sub",    "repo": "mattpocock/skills", "subdir": "skills/engineering/domain-modeling", "note": "被 grill-with-docs / improve-codebase-architecture 自动调用"},
+    "codebase-design":              {"level": 1, "phase": "sub",    "repo": "mattpocock/skills", "subdir": "skills/engineering/codebase-design", "note": "被 improve-codebase-architecture 自动调用"}
   },
   "local": []
 }

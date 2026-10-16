@@ -3,7 +3,7 @@
 # 用法:
 #   ./update.sh                      # 更新 .your-skill-collection.json 中 skills 字段的所有 skills
 #   ./update.sh codebase-design      # 只更新指定的 skill
-# 注意: skills 字段从 external 上游拉取；local 字段登记本地适配 skill（brainstorming/writing-plans/cleanup/handoff），手动维护、update.sh 不碰
+# 注意: skills 字段从 external 上游拉取；local 字段登记本地适配 skill（brainstorming/writing-plans/handoff），手动维护、update.sh 不碰
 
 set -euo pipefail
 

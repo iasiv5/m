@@ -6,7 +6,7 @@
 
 | 插件 | 包含内容 |
 | --- | --- |
-| `iasi` | 无 custom agents；11 个 skills（4 个本地适配：`brainstorming`/`writing-plans`/`handoff`/`cleanup`；7 个上游同步：`grilling`/`codebase-design`/`domain-modeling`/`grill-with-docs`/`improve-codebase-architecture`/`retro`/`writing-for-agents`）、`goal-driven` 命令、`copilot-thought-logging` instruction，以及 hooks 占位资源 |
+| `iasi` | 无 custom agents；10 个 skills（3 个本地适配：`brainstorming`/`writing-plans`/`handoff`；7 个上游同步：`grilling`/`codebase-design`/`domain-modeling`/`grill-with-docs`/`improve-codebase-architecture`/`retro`/`writing-for-agents`）、`goal-driven` 命令、`copilot-thought-logging` instruction，以及 hooks 占位资源 |
 
 ## 仓库结构
 ```text
@@ -40,7 +40,7 @@
 ### 验证
 
 - 打开 Copilot Chat 的插件列表，确认 `iasi` 已启用
-- 输入 `/`，确认可以看到 11 个 skills（`brainstorming`、`writing-plans`、`handoff`、`cleanup`、`grilling`、`codebase-design`、`domain-modeling`、`grill-with-docs`、`improve-codebase-architecture`、`retro`、`writing-for-agents`）以及 `goal-driven` 命令
+- 输入 `/`，确认可以看到 10 个 skills（`brainstorming`、`writing-plans`、`handoff`、`grilling`、`codebase-design`、`domain-modeling`、`grill-with-docs`、`improve-codebase-architecture`、`retro`、`writing-for-agents`）以及 `goal-driven` 命令
 - 手动调用一项本地 skill、一项上游 skill，并运行一次 `goal-driven`，确认相关插件资产可正常调用
 
 ### 常见问题
