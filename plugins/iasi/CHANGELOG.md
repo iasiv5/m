@@ -2,6 +2,16 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.8.2] - 2026-10-29
+
+### Changed
+
+- Clarified sub-agent dispatch wording in three skills to state that spawned sub-agents get a fresh context window:
+  - `codebase-design`: the design-it-twice sub-agents (`DESIGN-IT-TWICE.md`).
+  - `grilling`: the frontier fact-finding sub-agent.
+  - `improve-codebase-architecture`: the codebase-walk sub-agent.
+- Bumped the published plugin version metadata to `5.8.2` in both the plugin manifest and marketplace entry.
+
 ## [5.8.0] - 2026-10-15
 
 ### Added

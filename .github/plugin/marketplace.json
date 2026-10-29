@@ -13,7 +13,7 @@
       "name": "iasi",
       "source": "iasi",
       "description": "GitHub Copilot plugin with ten reusable skills and one reusable command prompt",
-      "version": "5.8.1"
+      "version": "5.8.2"
     }
   ]
 }
