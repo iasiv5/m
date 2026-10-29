@@ -2,6 +2,18 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.8.1] - 2026-10-16
+
+### Removed
+
+- Removed the `cleanup` skill (skill directory, references, test prompts, and registry entries), shrinking the plugin from 11 to 10 skills (3 locally adapted + 7 upstream-synced); updated both READMEs, the plugin description and keywords, and the `update.sh` header comment accordingly.
+
+### Changed
+
+- Restored automatic model invocation for the `brainstorming` skill by dropping its `disable-model-invocation: true` front-matter flag.
+- Restructured `.your-skill-collection.json` with tiered metadata: added `levels` (Level I auto-invocable / Level II manual-only) and `phases` (IPDD stages `ipdd-1`/`ipdd-2`/`ipdd-3`, plus `misc` and `sub`) dictionaries, and annotated every skill entry with `level`, `phase`, and where applicable `invokes` and `note`; the `local` registry list was emptied after the `cleanup` removal.
+- Bumped the published plugin version metadata to `5.8.1` in both the plugin manifest and marketplace entry.
+
 ## [5.8.2] - 2026-10-29
 
 ### Changed
