@@ -2,6 +2,26 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.8.3] - 2026-11-02
+
+### Changed
+
+- Synced the `brainstorming` skill from `iasiv5/skills` (v1.0.5) and restored `disable-model-invocation: true` in its front matter, so it is manual-only (Level II) again. This reverses the automatic-invocation restoration shipped in 5.8.1. The design-document path priority in the skill now reads `docs/specs/<topic>.md`.
+- Set `brainstorming` to `level: 2` in `.your-skill-collection.json` so the registry matches its front matter.
+- Corrected the plugin README's auto-load note: `writing-plans`, `handoff`, `writing-for-agents`, `grilling`, `domain-modeling`, and `codebase-design` auto-load (Level I), while `brainstorming`, `grill-with-docs`, `improve-codebase-architecture`, and `retro` are manual-only (Level II).
+- Corrected the `update.sh` header comment: each skill entry's `repo` is its sync source, and `brainstorming`, `writing-plans`, and `handoff` are synced from `iasiv5/skills` because the `local` list is empty.
+- Bumped the published plugin version metadata to `5.8.3` in both the plugin manifest and marketplace entry.
+
+## [5.8.2] - 2026-10-29
+
+### Changed
+
+- Clarified sub-agent dispatch wording in three skills to state that spawned sub-agents get a fresh context window:
+  - `codebase-design`: the design-it-twice sub-agents (`DESIGN-IT-TWICE.md`).
+  - `grilling`: the frontier fact-finding sub-agent.
+  - `improve-codebase-architecture`: the codebase-walk sub-agent.
+- Bumped the published plugin version metadata to `5.8.2` in both the plugin manifest and marketplace entry.
+
 ## [5.8.1] - 2026-10-16
 
 ### Removed
@@ -13,16 +33,6 @@ All notable changes to `iasi` will be documented in this file.
 - Restored automatic model invocation for the `brainstorming` skill by dropping its `disable-model-invocation: true` front-matter flag.
 - Restructured `.your-skill-collection.json` with tiered metadata: added `levels` (Level I auto-invocable / Level II manual-only) and `phases` (IPDD stages `ipdd-1`/`ipdd-2`/`ipdd-3`, plus `misc` and `sub`) dictionaries, and annotated every skill entry with `level`, `phase`, and where applicable `invokes` and `note`; the `local` registry list was emptied after the `cleanup` removal.
 - Bumped the published plugin version metadata to `5.8.1` in both the plugin manifest and marketplace entry.
-
-## [5.8.2] - 2026-10-29
-
-### Changed
-
-- Clarified sub-agent dispatch wording in three skills to state that spawned sub-agents get a fresh context window:
-  - `codebase-design`: the design-it-twice sub-agents (`DESIGN-IT-TWICE.md`).
-  - `grilling`: the frontier fact-finding sub-agent.
-  - `improve-codebase-architecture`: the codebase-walk sub-agent.
-- Bumped the published plugin version metadata to `5.8.2` in both the plugin manifest and marketplace entry.
 
 ## [5.8.0] - 2026-10-15
 

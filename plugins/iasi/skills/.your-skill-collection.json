@@ -12,7 +12,7 @@
   },
   "skills": {
     "grill-with-docs":              {"level": 2, "phase": "ipdd-1", "repo": "mattpocock/skills", "subdir": "skills/engineering/grill-with-docs", "invokes": ["grilling", "domain-modeling"], "note": "对齐意图首选"},
-    "brainstorming":                {"level": 1, "phase": "ipdd-1", "repo": "iasiv5/skills",     "subdir": "brainstorming", "note": "设计获批后移交 writing-plans 接续（PHASE 8 流转，非自动调用）"},
+    "brainstorming":                {"level": 2, "phase": "ipdd-1", "repo": "iasiv5/skills",     "subdir": "brainstorming", "note": "设计获批后移交 writing-plans 接续（PHASE 8 流转，非自动调用）"},
     "writing-plans":                {"level": 1, "phase": "ipdd-2", "repo": "iasiv5/skills",     "subdir": "writing-plans", "note": "设计未定时回退 brainstorming / grill-with-docs（PHASE 0 路由，非自动调用）"},
     "handoff":                      {"level": 1, "phase": "ipdd-3", "repo": "iasiv5/skills",     "subdir": "handoff", "note": "会话过长时先用它准备交接文案，新开 Session 继续"},
     "writing-for-agents":           {"level": 1, "phase": "misc",   "repo": "mattpocock/skills", "subdir": "skills/productivity/writing-for-agents"},
