@@ -3,7 +3,7 @@
 # 用法:
 #   ./update.sh                      # 更新 .your-skill-collection.json 中 skills 字段的所有 skills
 #   ./update.sh codebase-design      # 只更新指定的 skill
-# 注意: skills 字段各条目的 repo 即同步源（mattpocock 系来自 mattpocock/skills；brainstorming/writing-plans/handoff 来自 iasiv5/skills）；local 字段登记的 skill 手动维护、update.sh 不碰，当前 local 为空，故上述 skills 均由脚本同步
+# 注意: skills 字段各条目的 repo 即同步源（mattpocock 系来自 mattpocock/skills；writing-plans/handoff 来自 iasiv5/skills）；local 字段登记的 skill 手动维护、update.sh 不碰，当前 local 为空，故上述 skills 均由脚本同步
 
 set -euo pipefail
 

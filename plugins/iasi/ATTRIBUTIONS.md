@@ -4,17 +4,6 @@
 
 ---
 
-## brainstorming
-
-致敬 obra/superpowers 的 brainstorming skill：
-https://github.com/obra/superpowers/tree/main/skills/brainstorming/
-
-MIT License · Copyright (c) 2025 Jesse Vincent
-
-当前实现不是逐字搬运，而是面向 GitHub Copilot 的中文化、manual-first、artifact-backed 适配版。
-
----
-
 ## writing-plans
 
 致敬 obra/superpowers 的 writing-plans skill：

@@ -2,6 +2,18 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.8.4] - 2026-11-10
+
+### Removed
+
+- Removed the `brainstorming` skill and its bundled prompts, references, adapter, and attribution.
+
+### Changed
+
+- Updated `writing-plans` fallback routing to use `grill-with-docs` or clarify missing requirements.
+- Updated plugin and marketplace metadata, documentation, and sync configuration to reflect nine skills (two locally adapted and seven upstream-synced).
+- Bumped the published plugin version metadata to `5.8.4` in both the plugin manifest and marketplace entry.
+
 ## [5.8.3] - 2026-11-02
 
 ### Changed
