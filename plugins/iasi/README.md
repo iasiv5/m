@@ -49,7 +49,7 @@
 
 - 在聊天中直接输入 `/writing-plans`、`/handoff`、`/grilling`、`/codebase-design`、`/domain-modeling`、`/grill-with-docs`、`/improve-codebase-architecture`、`/retro` 或 `/writing-for-agents` 手动调用 skill
 - 在聊天中输入 `/` 后选择 `goal-driven` command prompt
-- 或在你发起实施规划、工程设计、交接总结、知识整理或 agent 文档写作等请求时，让 Copilot 根据资产描述自动加载可自动调用的 skills（`writing-plans`、`handoff`、`writing-for-agents`、`grilling`、`domain-modeling`、`codebase-design`）；`grill-with-docs`、`improve-codebase-architecture`、`retro` 带有 `disable-model-invocation: true`，只能手动调用
+- 或在你发起实施规划、工程设计、知识整理或 agent 文档写作等请求时，让 Copilot 根据资产描述自动加载可自动调用的 skills（`writing-plans`、`writing-for-agents`、`grilling`、`domain-modeling`、`codebase-design`）；`handoff`、`grill-with-docs`、`improve-codebase-architecture`、`retro` 带有 `disable-model-invocation: true`，只能手动调用
 
 ## 当前边界
 

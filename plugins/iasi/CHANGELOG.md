@@ -2,6 +2,14 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.8.5] - 2026-11-11
+
+### Changed
+
+- Synced the `handoff` skill from `iasiv5/skills` (v1.3.1): its front matter now sets `disable-model-invocation: true`, so it is manual-only (Level II) and no longer auto-loads on handoff-related requests.
+- Updated the plugin README's auto-load note to move `handoff` to the manual-only list.
+- Bumped the published plugin version metadata to `5.8.5` in both the plugin manifest and marketplace entry.
+
 ## [5.8.4] - 2026-11-10
 
 ### Removed
