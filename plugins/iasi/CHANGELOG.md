@@ -2,6 +2,14 @@
 
 All notable changes to `iasi` will be documented in this file.
 
+## [5.8.6] - 2026-11-12
+
+### Changed
+
+- Unified the skill sync upstream: repointed the seven upstream-synced skills (`grill-with-docs`, `writing-for-agents`, `improve-codebase-architecture`, `retro`, `grilling`, `domain-modeling`, `codebase-design`) in `.your-skill-collection.json` from `mattpocock/skills` to their same-named top-level directories in `iasiv5/skills`, so `update.sh` now syncs every skill from a single upstream.
+- Updated the `update.sh` header comment and the ATTRIBUTIONS sync note to describe the single-upstream setup; the original-author credits and MIT license notice for `mattpocock/skills` are unchanged.
+- Bumped the published plugin version metadata to `5.8.6` in both the plugin manifest and marketplace entry.
+
 ## [5.8.5] - 2026-11-11
 
 ### Changed

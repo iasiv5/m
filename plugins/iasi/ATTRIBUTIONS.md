@@ -30,7 +30,7 @@ MIT License · Copyright (c) 2025 Jesse Vincent
 
 ---
 
-## 上游同步 skills（mattpocock/skills）
+## 上游同步 skills（原始出处 mattpocock/skills，现统一经 iasiv5/skills 同步）
 
 致敬 mattpocock/skills 的同名 skill：
 
@@ -44,7 +44,7 @@ MIT License · Copyright (c) 2025 Jesse Vincent
 
 MIT License · Copyright (c) 2026 Matt Pocock
 
-这七个 skills 由本目录的 `update.sh` 从 mattpocock/skills 上游原样同步（英文、标准 SKILL.md），保留上游格式、不做中文化适配——Claude Code 与 GitHub Copilot 均直接加载 `.claude/skills` 下标准 SKILL.md，英文原版两个 runtime 均可用。
+这七个 skills 原始出处为 mattpocock/skills，现由本目录的 `update.sh` 统一从 iasiv5/skills 上游原样同步（英文、标准 SKILL.md），保留上游格式、不做中文化适配——Claude Code 与 GitHub Copilot 均直接加载 `.claude/skills` 下标准 SKILL.md，英文原版两个 runtime 均可用。
 
 ---
 
